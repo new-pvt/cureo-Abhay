@@ -5,6 +5,7 @@
 
 html {
     scroll-behavior: smooth;
+    height: -webkit-fill-available;
 }
 * {
     padding: 0;
