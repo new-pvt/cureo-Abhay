@@ -1,0 +1,16 @@
+@media (max-width: 600px) {
+    .date-picker div {
+      
+        border: none;
+        outline: none;
+        /* background-color: red; */
+    }
+}
+
+.date-picker input:focus{
+    border: none;
+    outline: none;
+    padding: 0;
+}
+
+

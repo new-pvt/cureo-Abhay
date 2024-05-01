@@ -1,0 +1,84 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    scroll-behavior: smooth;
+}
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+    display: none;
+}
+textarea {
+    resize: none;
+}
+
+progress {
+    border-radius: 29px;
+    height: 6.02px;
+    background-color: #ffffff;
+}
+progress::-webkit-progress-bar {
+    background-color: #ffffff;
+    border-radius: 7px;
+}
+progress::-webkit-progress-value {
+    background-color: #1f51c6;
+    border-radius: 7px;
+}
+progress::-moz-progress-bar {
+    background-color: #ffffff;
+    border-radius: 7px;
+}
+
+.doctor-dashboard::-webkit-progress-bar {
+    background-color: #edeefd;
+    border-radius: 7px;
+}
+.doctor-dashboard::-webkit-progress-value {
+    background-color: #108ed6;
+    border-radius: 7px;
+}
+
+
+
+
+
+*::-webkit-scrollbar {
+    height: 4px;
+    width: 10px;
+  }
+  
+  *::-webkit-scrollbar-track {
+    border-radius: 5px;
+    background-color: #FFFFFF;
+  }
+  
+  *::-webkit-scrollbar-track:hover {
+    background-color: #5D5E612E;
+  }
+  
+  *::-webkit-scrollbar-track:active {
+    background-color: #5D5E612E;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #108ED6;
+  }
+  
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: #1a618a;
+  }
+  
+  *::-webkit-scrollbar-thumb:active {
+    background-color: #1a618a;
+  }
+  
+
