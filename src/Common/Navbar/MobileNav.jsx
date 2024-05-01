@@ -29,7 +29,7 @@ const MobileNav = ({
     }, []);
 
     return (
-        <div className="fixed flex md:hidden justify-center items-end h-screen inset-0 z-40 bg-c21 px-4">
+        <div className="fixed flex md:hidden justify-center items-end h-[100dvh] inset-0 z-40 bg-c21 px-4">
             <div
                 ref={ref}
                 className="flex flex-col items-center relative my-4 py-4 bg-c2 w-full rounded-[13px]"
