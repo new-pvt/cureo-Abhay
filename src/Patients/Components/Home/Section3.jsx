@@ -1,8 +1,11 @@
 import React, { memo } from "react";
 import PrimaryButton from "../../../Common/Components/Buttons/PrimaryButton";
 import { H2, H4, P1, P2 } from "../../../Common/Components/Text/Textt";
+import { useNavigate } from "react-router-dom";
 
 const Section3 = () => {
+    const navigate = useNavigate();
+
     const featuresData = [
         {
             number: "01",
@@ -42,6 +45,7 @@ const Section3 = () => {
                     className="text-center md:text-left"
                 />
                 <PrimaryButton
+                    onclick={() => navigate("/find-doctors")}
                     className={
                         "bg-c1 w-[171px] mt-[13.5px] mx-auto block md:mx-0"
                     }

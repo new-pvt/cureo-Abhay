@@ -1,14 +1,25 @@
-@keyframes slide-fade-in {
+/* @keyframes slide-fade-in {
     from {
-    opacity: 0;
-    transform: translateY(5vh);
+        opacity: 0;
+        transform: translateY(5vh);
     }
-    } 
-    @media (prefers-reduced-motion: no-preference) {
-        .animation {
+}
+@media (prefers-reduced-motion: no-preference) {
+    .animation {
         view-timeline-name: --item-timeline;
         animation: slide-fade-in both;
         animation-timeline: --item-timeline;
         animation-range: contain 0% contain 50%;
-        }
     }
+} */
+
+
+/* .section2Gradient{
+    background-image: linear-gradient(#ffffff, #108dd6bb, #1f51c63b);
+} */
+/* .sectionGradient{
+    background-image: linear-gradient(#1F51C6AD, #108ED6, #1F51C6);
+} */
+
+
+/* bg-gradient-to-r from-[#1F51C6AD] via-[#108ED6] to-[#1F51C6] */

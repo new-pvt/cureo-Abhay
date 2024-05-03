@@ -16,24 +16,24 @@ const Footer = () => {
                 },
                 {
                     tabName: "Appointments",
-                    to: "/appointments",
+                    to: "/patient/appointments",
                 },
                 {
                     tabName: "Records",
-                    to: "/records",
+                    to: "/patient/records",
                 },
                 {
                     tabName: "Contact Us",
                     to: "/contact-us",
                 },
-                {
-                    tabName: "Our Team",
-                    to: "/our-team",
-                },
-                {
-                    tabName: "Blogs",
-                    to: "/blogs",
-                },
+                // {
+                //     tabName: "Our Team",
+                //     to: "/our-team",
+                // },
+                // {
+                //     tabName: "Blogs",
+                //     to: "/blogs",
+                // },
             ],
         },
         {
@@ -41,19 +41,19 @@ const Footer = () => {
             links: [
                 {
                     tabName: "Help",
-                    to: "/",
+                    to: "/contact-us",
                 },
                 {
                     tabName: "Privacy Policy",
-                    to: "/",
+                    to: "/medidek/privacy",
                 },
                 {
                     tabName: "Terms & Condition",
-                    to: "/",
+                    to: "/medidek/termsAndCondition",
                 },
                 {
                     tabName: "Cancellation Policy",
-                    to: "/",
+                    to: "/medidek/cancellation-policy",
                 },
             ],
         },
@@ -105,16 +105,34 @@ const Footer = () => {
                     <div className="text-white hidden md:block">
                         <b className="font-f2 font-w3 text-[20px]">Socials</b>
                         <div className="flex gap-2.5 mt-2">
-                            <a to={"/"}>
+                            <a
+                                href={
+                                    "https://www.instagram.com/medidekofficial/"
+                                }
+                                target="_blank"
+                            >
                                 <img src="/Home/Insta.svg" alt="icon" />
                             </a>
-                            <a to={"/"}>
+                            <a
+                                href={
+                                    "https://www.linkedin.com/company/medidek/"
+                                }
+                                target="_blank"
+                            >
                                 <img src="/Home/LinkedIn.svg" alt="icon" />
                             </a>
-                            <a to={"/"}>
+                            <a
+                                href={
+                                    "https://www.facebook.com/people/Medidek/100094316681517/?mibextid=ZbWKwL"
+                                }
+                                target="_blank"
+                            >
                                 <img src="/Home/facebook.svg" alt="icon" />
                             </a>
-                            <a to={"/"}>
+                            <a
+                                href={"https://www.youtube.com/@MedidekSocial"}
+                                target="_blank"
+                            >
                                 <img src="/Home/Youtube.svg" alt="icon" />
                             </a>
                         </div>

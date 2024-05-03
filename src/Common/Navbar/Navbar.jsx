@@ -107,8 +107,8 @@ const Navbar = () => {
         { content: "Appointments", pathname: "/patient/appointments" },
         { content: "Records", pathname: "/patient/records" },
         { content: "Contact Us", pathname: "/contact-us" },
-        { content: "Our Team", pathname: "/our-team" },
-        { content: "Blogs", pathname: "/blogs" },
+        // { content: "Our Team", pathname: "/our-team" },
+        // { content: "Blogs", pathname: "/blogs" },
     ];
     return (
         // <header className="relative mx-[50px] my-[30px]">

@@ -1,16 +1,25 @@
 import React, { memo } from "react";
-import './Style/section1.css'
+import "./Style/section1.css";
 import PrimaryButton from "../../../Common/Components/Buttons/PrimaryButton";
+import Section2 from "./Section2";
+import { useNavigate } from "react-router-dom";
 
 const Section1 = () => {
+
+    const navigate = useNavigate();
+    const openInNewTab = () => {
+        const win = window.open('https://play.google.com/store/apps/details?id=com.listnative04', '_blank');
+        win.focus();
+      };
     return (
-        <section className=" w-full relative  min-h-[calc(100vh-108px)] flex justify-center items-center px-4 py-4 md:px-[50px]">
-            <div className="md:w-[55%] h-1/3 blur-[120px] absolute bottom-0 -z-10 bg-gradient-to-b from-[#1F51C6AD] via-[#108ED6] to-[#1F51C6]"></div>
-            <div className=" flex flex-col gap-4 w-full md:w-[39.33%]">
+        <section className=" w-full section2Gradient relative overflow-hidden min-h-[calc(100vh-108px)] flex justify-center items-center px-4 py-4 md:px-[50px]">
+            <div className="w-full h-10  blur-[120px] absolute botto  bg-gradient-to-b from-[#1F51C6AD] via-[#108ED6] to-[#1F51C6]"></div>
+
+            <div className="relative flex flex-col gap-4 w-full md:w-[39.33%] ">
                 <img
                     src="/Home/Line2.png"
                     alt="img"
-                    className="absolute left-0 hidden md:block"
+                    className="absolute -left-[45%] md:-left-[85%] top-5 md:-top-10 w-[226.41px] md:w-full"
                 />
                 <h1 className="font-f1 font-w3 text-[28px] md:text-[2.813rem] text-center text-c15 leading-[39.99px] md:leading-[52.99px]">
                     Transform Your Healthcare with Medidek
@@ -21,7 +30,8 @@ const Section1 = () => {
                 </p>
                 <div className="flex justify-center gap-2.5">
                     <PrimaryButton
-                        className={"bg-c1 w-[145px]"}   
+                        onclick={()=>navigate("/find-doctors")}
+                        className={"bg-c1 w-[145px]"}
                         h={"45px"}
                         bg={"c1"}
                         color={"white"}
@@ -29,6 +39,7 @@ const Section1 = () => {
                         content={"Book Now"}
                     />
                     <PrimaryButton
+                    onclick={openInNewTab}
                         className={"bg-c3 w-[177px] hidden md:block"}
                         w={"177px"}
                         // px={"33px"}
@@ -43,7 +54,7 @@ const Section1 = () => {
                 <img
                     src="/Home/Line1.png"
                     alt="img"
-                    className="absolute right-0 hidden md:block"
+                    className="absolute -right-[40%] bottom-[70px] md:bottom-0 md:-right-[85%] w-[226.41px] md:w-full"
                 />
             </div>
         </section>

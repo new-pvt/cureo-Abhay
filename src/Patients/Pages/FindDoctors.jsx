@@ -10,9 +10,27 @@ import SearchLocation from "../../Common/Components/Inputs/SearchLocation";
 import { useNavigate } from "react-router-dom";
 import Illistration from "../../Common/Components/Illustration/Illistration";
 import toast from "react-hot-toast";
-import useDebouncedEffect from "../../Utils/Hooks/useDebouncedEffect";
+import SkeletonForDoctorsCard from "../Components/Find Doctors/SkeletonForDoctorsCard";
 
 const FindDoctors = () => {
+    // const [searchResults, setSearchResults] = useState([]);
+    // const [searchTerm, setSearchTerm] = useState("");
+
+    // const request = debounce(async (searchTerm) => {
+    //     const results = await getSearchResults(searchTerm);
+    //     setSearchResults(results);
+    // }, 500);
+
+    // const debounceRequest = useCallback(
+    //     (searchTerm) => request(searchTerm),
+    //     []
+    // );
+
+    // const onChange = (e) => {
+    //     setSearchTerm(e.target.value);
+    //     debounceRequest(e.target.value);
+    // };
+
     const {
         setValue,
         suggestions: { data },
@@ -66,23 +84,22 @@ const FindDoctors = () => {
         setInput1(value);
         setLocation(value);
     };
-    const getDoctorsList = async (location, speciality, setIsLoading, setDoctorsData) => {
-        // setIsLoading(true);
+    const getDoctorsList = async () => {
+        setIsLoading(true);
         try {
-            const response = await axiosClient.get(`/v2/getusergetalldoctors?locationOrNameOfTheDoctor=${location + " " + speciality}`);
+            const response = await axiosClient.get(
+                `/v2/getusergetalldoctors?locationOrNameOfTheDoctor=${location + " " + speciality}`
+            );
             if (response.status === "ok") {
                 setIsLoading(false);
                 setDoctorsData(response.result);
             }
         } catch (error) {
-            // setIsLoading(false);
-            console.log(error.message);
+            toast.error(error.message);
+        } finally {
+            setIsLoading(false);
         }
     };
-
-    useDebouncedEffect(() => {
-        getDoctorsList(location, speciality, setIsLoading, setDoctorsData);
-    }, 500, [location, speciality]);
 
     const getSpeacilityList = async () => {
         try {
@@ -94,11 +111,41 @@ const FindDoctors = () => {
     };
 
     useEffect(() => {
-        getDoctorsList();
+        const request = setTimeout(() => {
+            getDoctorsList();
+        }, 800);
+
+        return () => clearTimeout(request);
     }, [location, speciality]);
+
     useEffect(() => {
         getSpeacilityList();
     }, []);
+
+
+    // if (doctorsData[0] == "No Doctors Found") {
+    //     return (
+    //         <div className="relative">
+    //             <div className="md:w-[55%] h-1/3 blur-[120px] absolute bottom-0 right-0 left-0 mx-auto -z-10 bg-gradient-to-b from-[#1F51C6AD] via-[#108ED6] to-[#1F51C6]"></div>
+    //             <Illistration
+    //                 src={"/Find Doctors/couldn't find anything.svg"}
+    //                 errorTitle={"Sorry! We Couldn’t find anything :("}
+    //                 subText={`We couldn’t find anything for “${location}”`}
+    //                 imgClassName="h-[236px] md:w-[311px] md:h-[311px]"
+    //                 button={{
+    //                     content: "Explore",
+    //                     onclick: () => {
+    //                         setLocation("");
+    //                         setSpeciality("");
+    //                     },
+    //                 }}
+    //             />
+    //         </div>
+    //     );
+    // }
+    // return Array.from({ length: 10 }).map((_, i) => (
+    //     <AppointmentCardSkelaton />
+    // ));
 
     return (
         <div className="overflow-x-hidden relative min-h-[calc(100vh-108px)] mt-[40px] px-4 md:px-[50px]">
@@ -131,13 +178,31 @@ const FindDoctors = () => {
                     inputClasses="rounded-[106px] text-[13px]"
                 />
             </div>
-            {doctorsData?.length > 0 && (
-                <H7
-                    content={`${doctorsData?.length} doctors near you`}
-                    className="my-6 md:mt-[50px] md:mb-[22px]"
-                />
-            )}
-            {doctorsData?.length > 0 ? (
+            {doctorsData?.length > 0 &&
+                doctorsData[0] != "No Doctors Found" && (
+                    <H7
+                        content={`${doctorsData?.length} doctors near you`}
+                        className="my-6 md:mt-[50px] md:mb-[22px]"
+                    />
+                )}
+            {doctorsData[0] == "No Doctors Found" ? (
+                <div className="relative">
+                    <div className="md:w-[55%] h-1/3 blur-[120px] absolute bottom-0 right-0 left-0 mx-auto -z-10 bg-gradient-to-b from-[#1F51C6AD] via-[#108ED6] to-[#1F51C6]"></div>
+                    <Illistration
+                        src={"/Find Doctors/couldn't find anything.svg"}
+                        errorTitle={"Sorry! We Couldn’t find anything :("}
+                        subText={`We couldn’t find anything for “${location}”`}
+                        imgClassName="h-[236px] md:w-[311px] md:h-[311px]"
+                        button={{
+                            content: "Explore",
+                            onclick: () => {
+                                setLocation("");
+                                setSpeciality("");
+                            },
+                        }}
+                    />
+                </div>
+            ) : (
                 doctorsData?.map((doctorInfo) => (
                     // <Link key={doctorInfo?._id} to={`/doctor-details/${doctorInfo?._id}`} >
                     <DoctorCard
@@ -150,20 +215,6 @@ const FindDoctors = () => {
                     />
                     // </Link>
                 ))
-            ) : (
-                <div className="relative">
-                    <div className="md:w-[55%] h-1/3 blur-[120px] absolute bottom-0 right-0 left-0 mx-auto -z-10 bg-gradient-to-b from-[#1F51C6AD] via-[#108ED6] to-[#1F51C6]"></div>
-                    <Illistration
-                        src={"/Find Doctors/couldn't find anything.svg"}
-                        errorTitle={"Sorry! We Couldn’t find anything :("}
-                        subText={`We couldn’t find anything for “${location}”`}
-                        imgClassName="h-[236px] md:w-[311px] md:h-[311px]"
-                        button={{
-                            content: "Explore",
-                            onclick: () => navigate("/find-doctors"),
-                        }}
-                    />
-                </div>
             )}
             {/* {doctorsData?.map((doctorInfo) => (
                 // <Link key={doctorInfo?._id} to={`/doctor-details/${doctorInfo?._id}`} >

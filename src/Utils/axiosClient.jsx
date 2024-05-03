@@ -12,14 +12,14 @@ import {
     patientAuth,
 } from "./Store/authSlice";
 
-export const axiosClient = axios.create({
-    baseURL: "https://cureo-backend.onrender.com",
-    // withCredentials: true
-});
 // export const axiosClient = axios.create({
-//     baseURL: "http://localhost:5001",
+//     baseURL: "https://cureo-backend.onrender.com",
 //     // withCredentials: true
 // });
+export const axiosClient = axios.create({
+    baseURL: "http://localhost:5001",
+    // withCredentials: true
+});
 
 const AxiosInterceptor = ({ children }) => {
 

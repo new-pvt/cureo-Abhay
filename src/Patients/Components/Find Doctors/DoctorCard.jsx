@@ -69,7 +69,7 @@ const DoctorCard = ({
                     <div
                         className={`flex ${hideInSm && "hidden"} items-center gap-[5px]`}
                     >
-                        <img src="/patient/Find Doctors/Location-2.svg" alt="img" />
+                        <img src="/Find Doctors/Location-2.svg" alt="img" />
                         <Span content={doctorInfo?.location} />
                     </div>
                     <Span content="114 Ratings" />

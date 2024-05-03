@@ -27,10 +27,15 @@ import Navbar from "../Common/Navbar/Navbar";
 import CreateProfile from "./Pages/CreateProfile";
 import NotFound from "../Common/Components/NotFound/NotFound";
 import CancelledAppointmentDetails from "./Pages/CancelledAppointmentDetails";
+import TermsAndCondition from "./Pages/TermsAndCondition";
+import Privacy from "./Pages/Privacy";
+import CancellationPolicy from "./Pages/CancellationPolicy";
+// import PrivacyPolicy from "./Pages/PrivacyPolicy";
+// import PrivacyPolicy from "./Pages/PrivacyPolicy";
 
 const Patient = () => {
     const dispatch = useDispatch();
-    const {pathname} = useLocation();
+    const { pathname } = useLocation();
     const { user, isLoggedIn } = useSelector((state) => state.auth);
 
     // {(isLoggedIn && user?.role == "DOCTOR" && <></>) ||
@@ -77,6 +82,16 @@ const Patient = () => {
                         <Route path="/contact-us" element={<ContactUs />} />
                         <Route path="/our-team" element={<OurTeam />} />
                         <Route path="/blogs" element={<Blogs />} />
+                        <Route path="/medidek/privacy" element={<Privacy />} />
+                        <Route
+                            path="/medidek/termsAndCondition"
+                            element={<TermsAndCondition />}
+                        />
+                        <Route
+                            path="/medidek/cancellation-policy"
+                            element={<CancellationPolicy />}
+                        />
+                        <Route path="/medidek/privacy" element={<Blogs />} />
                         <Route
                             path="/patient/create-profile"
                             element={<CreateProfile />}
@@ -88,10 +103,7 @@ const Patient = () => {
                         <Route path="*" element={<NotFound />} />
                     </Routes>
                 </ContactUsContextProvider>
-                {
-                    pathname !== "/patient/create-profile" &&  <Footer />
-                }
-               
+                {pathname !== "/patient/create-profile" && <Footer />}
             </AppointmentContextProvider>
         </div>
     );

@@ -23,6 +23,14 @@ const ContactUs = () => {
     const [loading, setLoading] = useState(false);
     const [successPopUp, setSuccessPopUp] = useState(false);
 
+
+    const openInNewTab = () => {
+        const win = window.open('https://maps.app.goo.gl/NQRGhEc1GVmTKxwW9', '_blank');
+        win.focus();
+      };
+
+    
+
     const inputs = [
         {
             type: "text",
@@ -147,8 +155,9 @@ const ContactUs = () => {
                 <div className="relative">
                     <img src="/Home/Homepage-map.png" alt="img" className="" />
                     <PrimaryButton
+                    onclick={openInNewTab}
                         className={
-                            "bg-c1 px-[11px] py-2 text-[10px] font-f3 absolute z-10 top-[15px] left-[15px]"
+                            "bg-c1 px-[11px] py-2 text-[10px] font-f3 absolute top-[15px] left-[15px]"
                         }
                         // h={"45px"}
                         bg={"c1"}
