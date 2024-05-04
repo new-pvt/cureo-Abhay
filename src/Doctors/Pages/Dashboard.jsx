@@ -11,18 +11,18 @@ const Dashboard = () => {
     const cardData = [
         {
             cardName: "Appointments",
-            value: 78,
-            progress: 80,
+            value: 0,
+            progress: 0,
         },
         {
             cardName: "Total Patients",
-            value: 20,
-            progress: 30,
+            value: 0,
+            progress: 0,
         },
         {
             cardName: "Next Appointment",
-            value: 60,
-            progress: 50,
+            value: 0,
+            progress: 0,
         },
     ];
     const [date, setDate] = useState(moment().format("DD-MM-YYYY"));
