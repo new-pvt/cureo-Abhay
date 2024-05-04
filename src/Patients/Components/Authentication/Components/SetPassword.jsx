@@ -15,7 +15,7 @@ const SetPassword = ({ setCurrentDialog }) => {
     const [showPassword, setShowPassword] = useState(false);
     const [notAStrongPassword, setNotAStrongPassword] = useState(null);
 
-    console.log(signInInfo?.password.length == 0);
+
     const isStrongPassword = useCallback(
         (password) => {
             if (!/[A-Z]/.test(password)) {
@@ -157,7 +157,7 @@ const SetPassword = ({ setCurrentDialog }) => {
                               : signInInfo?.password !=
                                   signInInfo?.confirmPassword
                                 ? true
-                                : false
+                                : notAStrongPassword ? true : false
                     }
                 />
             </form>
