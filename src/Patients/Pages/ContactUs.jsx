@@ -103,7 +103,7 @@ const ContactUs = () => {
     };
 
     return (
-        <main className="overflow-x-hidden md:mt-0 relative px-[16px] md:px-[50px] pt-[33px] md:pt-10 pb-[223px] w-full min-h-[calc(100vh-93px)] flex flex-col md:flex-row gap-[50px] md:gap-[50px] items-center">
+        <main className="overflow-x-hidden md:mt-0 relative px-[16px] md:px-[50px] pt-[33px]  md:pt-10 pb-10 w-full min-h-[calc(100vh-93px)] flex flex-col md:flex-row gap-[50px] md:gap-[50px] items-center">
             {/* <div className="md:w-[35%] h-[25%] blur-[120px] absolute top-0 -right-10 -z-10 bg-gradient-to-t from-[#1F51C6AD] via-[#108ED6] to-[#1F51C6]"></div> */}
 
             <div className="md:w-[35%] h-[25%] blur-[120px] absolute left-0 bottom-0 -z-10 bg-gradient-to-b from-[#1F51C6AD] via-[#108ED6] to-[#1F51C6]"></div>

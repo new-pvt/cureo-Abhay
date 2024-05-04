@@ -1,8 +1,162 @@
 import React, { useState } from "react";
-import useClickAwayToClose from "../../../Utils/Hooks/useClickAwayToClose";
+import useClickAwayToClose from "../../Utils/Hooks/useClickAwayToClose";
 
-const MultiSelect = ({
-    options,
+const array = [
+    "Dental Cleanings",
+    "Examinations and Check-ups",
+    "X-rays",
+    "Fillings",
+    "Root Canals",
+    "Extractions",
+    "Crowns and Bridges",
+    "Dental Implants",
+    "Orthodontic Treatments (Braces, Invisalign)",
+    "Periodontal (Gum) Treatments",
+    "Oral Surgery",
+    "Cosmetic Dentistry (Teeth Whitening, Veneers)",
+    "Dentures and Partial Dentures",
+    "TMJ/TMD Treatment",
+    "Pediatric Dentistry (Children's Dentistry)",
+    "Oral Cancer Screening",
+    "Routine Check-ups",
+    "Diagnosis and Treatment",
+    "Chronic Disease Management",
+    "Preventive Care",
+    "Referrals",
+    "Health Counseling",
+    "Management of Minor Injuries",
+    "Prescription Management",
+    "Skin Examinations",
+    "Acne Treatment",
+    "Skin Cancer Screening",
+    "Psoriasis Treatment",
+    "Eczema Treatment",
+    "Rosacea Treatment",
+    "Hair Loss Treatment",
+    "Cosmetic Dermatology (Botox, Fillers)",
+    "Skin Biopsies",
+    "Skin Allergy Testing",
+    "Mohs Surgery",
+    "Laser Therapy",
+    "Comprehensive Eye Exams",
+    "Prescription for Glasses and Contact Lenses",
+    "Treatment for Eye Infections",
+    "Cataract Surgery",
+    "LASIK Surgery",
+    "Glaucoma Treatment",
+    "Diabetic Eye Exams",
+    "Macular Degeneration Treatment",
+    "Retinal Examinations",
+    "Corneal Transplants",
+    "Prenatal Care",
+    "Labor and Delivery",
+    "Gynecological Exams",
+    "Family Planning Services",
+    "Menopause Management",
+    "Treatment for Pelvic Pain",
+    "STI Testing and Treatment",
+    "Infertility Evaluation and Treatment",
+    "Endometrial Biopsy",
+    "Hysterectomy",
+    "Colposcopy",
+    "Cervical Cancer Screening (Pap Smear)",
+    "Orthopedic Evaluations",
+    "Fracture Care",
+    "Joint Replacement Surgery",
+    "Sports Medicine",
+    "Arthroscopic Surgery",
+    "Spinal Surgery",
+    "Hand Surgery",
+    "Foot and Ankle Surgery",
+    "Orthopedic Trauma Surgery",
+    "Orthopedic Oncology",
+    "Orthopedic Rehabilitation",
+    "Physical Examinations",
+    "Vaccinations",
+    "Parasite Control",
+    "Dental Care",
+    "Surgical Procedures",
+    "Diagnostic Imaging (X-rays, Ultrasound)",
+    "Laboratory Testing (Bloodwork, Urinalysis)",
+    "Emergency Care",
+    "Nutritional Counseling",
+    "Behavioral Counseling",
+    "Microchipping",
+    "End-of-Life Care (Euthanasia)",
+    "Ayurvedic Consultation",
+    "Panchakarma Therapies",
+    "Herbal Medicine",
+    "Dietary and Lifestyle Counseling",
+    "Ayurvedic Massage",
+    "Detoxification",
+    "Stress Management",
+    "Yoga and Meditation",
+    "Dry Cupping",
+    "Wet Cupping",
+    "Massage Cupping",
+    "Cupping Therapy for Pain Relief",
+    "Cupping Therapy for Detoxification",
+    "Cupping Therapy for Respiratory Disorders",
+    "Cupping Therapy for Digestive Disorders",
+    "Cupping Therapy for Skin Conditions",
+    "Appendectomy",
+    "Hernia Repair",
+    "Gallbladder Surgery",
+    "Colon Surgery",
+    "Breast Surgery",
+    "Thyroid Surgery",
+    "Hemorrhoidectomy",
+    "Skin Lesion Removal",
+    "Laparoscopic Surgery",
+    "Endoscopy",
+    "Biopsy",
+    "Homoeopathic Consultation",
+    "Homoeopathic Medicine",
+    "Individualized Treatment Plans",
+    "Preventive Medicine",
+    "Internal Medicine Consultation",
+    "Disease Diagnosis and Management",
+    "Medication Management",
+    "Health Promotion",
+    "Health Education",
+    "Physical Rehabilitation",
+    "Pain Management",
+    "Post-surgery Rehabilitation",
+    "Geriatric Rehabilitation",
+    "Neurological Rehabilitation",
+    "Cardiac Rehabilitation",
+    "Pulmonary Rehabilitation",
+    "Pediatric Rehabilitation",
+    "Dentures",
+    "Implant-supported Dentures",
+    "Full Mouth Rehabilitation",
+    "Smile Makeover",
+    "Temporomandibular Joint (TMJ) Therapy",
+    "Maxillofacial Prosthetics",
+    "Root Canal Therapy (RCT)",
+    "Pulpotomy",
+    "Apicoectomy",
+    "Endodontic Retreatment",
+    "Dental Emergency Care for Root Canal Issues",
+    "Composite Fillings",
+    "Amalgam Fillings",
+    "Glass Ionomer Fillings",
+    "Ceramic Fillings",
+    "Temporary Fillings",
+    "Direct Fillings",
+    "Indirect Fillings",
+    "Core Build-ups",
+    "Simple Tooth Extraction",
+    "Surgical Tooth Extraction",
+    "Wisdom Teeth Extraction",
+    "Orthodontic Extraction",
+    "Emergency Tooth Extraction"
+  ]
+  
+  
+
+const Practice = ({
+    options = array,
     divClasses,
     handleChange,
     selectedOptions,
@@ -30,9 +184,9 @@ const MultiSelect = ({
     );
 
     return (
-        <div ref={ref} className={`relative min-h-[40px] ${divClasses}`}>
+        <div ref={ref} className={`relative min-h-[40px] ${divClasses} mb-[500px]`}>
             <div className="flex flex-wrap border border-gray-300 rounded p-2 focus-within:border-blue-500">
-                {selectedOptions.map((option) => (
+                {selectedOptions?.map((option) => (
                     <div
                         key={option}
                         className="bg-c3 flex items-center text-white rounded-md px-2 m-1 "
@@ -52,7 +206,7 @@ const MultiSelect = ({
                     required={required}
                     className="flex-1 outline-none border-none"
                     placeholder={
-                        selectedOptions.length > 0 ? "" : "Enter Services"
+                        selectedOptions?.length > 0 ? "" : "Enter Services"
                     }
                     name="services"
                     value={filterText}
@@ -69,11 +223,10 @@ const MultiSelect = ({
                             id="services"
                             onMouseDown={(e) => {
                                 handleChange(e, option);
-                                setFilterText("")
                                 setIsOpen(false);
                             }} // Change onClick to onMouseDown
                             className={`p-2 cursor-pointer hover:bg-[#D9D9D961] ${
-                                selectedOptions.includes(option)
+                                selectedOptions?.includes(option)
                                     ? " text-c1"
                                     : "bg-c2 text-gray-700"
                             }`}
@@ -87,7 +240,7 @@ const MultiSelect = ({
     );
 };
 
-export default MultiSelect;
+export default Practice;
 
 // import { memo, useRef, useState } from "react";
 // import { IoIosArrowDown } from "react-icons/io";

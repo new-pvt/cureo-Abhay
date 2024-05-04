@@ -15,7 +15,159 @@ import useClickAwayToClose from "../../Utils/Hooks/useClickAwayToClose";
 import { TextButton } from "../../Common/Components/Text/Textt";
 import { logOutDoctor } from "../../Utils/Store/doctorDataSlice";
 import { KEY_ACCESS_TOKEN, removeItem } from "../../Utils/localStorageManager";
+import DatePicker from "../../Common/Components/Inputs/DatePicker";
 
+const servisesOptions = [
+    "Dental Cleanings",
+    "Examinations and Check-ups",
+    "X-rays",
+    "Fillings",
+    "Root Canals",
+    "Extractions",
+    "Crowns and Bridges",
+    "Dental Implants",
+    "Orthodontic Treatments (Braces, Invisalign)",
+    "Periodontal (Gum) Treatments",
+    "Oral Surgery",
+    "Cosmetic Dentistry (Teeth Whitening, Veneers)",
+    "Dentures and Partial Dentures",
+    "TMJ/TMD Treatment",
+    "Pediatric Dentistry (Children's Dentistry)",
+    "Oral Cancer Screening",
+    "Routine Check-ups",
+    "Diagnosis and Treatment",
+    "Chronic Disease Management",
+    "Preventive Care",
+    "Referrals",
+    "Health Counseling",
+    "Management of Minor Injuries",
+    "Prescription Management",
+    "Skin Examinations",
+    "Acne Treatment",
+    "Skin Cancer Screening",
+    "Psoriasis Treatment",
+    "Eczema Treatment",
+    "Rosacea Treatment",
+    "Hair Loss Treatment",
+    "Cosmetic Dermatology (Botox, Fillers)",
+    "Skin Biopsies",
+    "Skin Allergy Testing",
+    "Mohs Surgery",
+    "Laser Therapy",
+    "Comprehensive Eye Exams",
+    "Prescription for Glasses and Contact Lenses",
+    "Treatment for Eye Infections",
+    "Cataract Surgery",
+    "LASIK Surgery",
+    "Glaucoma Treatment",
+    "Diabetic Eye Exams",
+    "Macular Degeneration Treatment",
+    "Retinal Examinations",
+    "Corneal Transplants",
+    "Prenatal Care",
+    "Labor and Delivery",
+    "Gynecological Exams",
+    "Family Planning Services",
+    "Menopause Management",
+    "Treatment for Pelvic Pain",
+    "STI Testing and Treatment",
+    "Infertility Evaluation and Treatment",
+    "Endometrial Biopsy",
+    "Hysterectomy",
+    "Colposcopy",
+    "Cervical Cancer Screening (Pap Smear)",
+    "Orthopedic Evaluations",
+    "Fracture Care",
+    "Joint Replacement Surgery",
+    "Sports Medicine",
+    "Arthroscopic Surgery",
+    "Spinal Surgery",
+    "Hand Surgery",
+    "Foot and Ankle Surgery",
+    "Orthopedic Trauma Surgery",
+    "Orthopedic Oncology",
+    "Orthopedic Rehabilitation",
+    "Physical Examinations",
+    "Vaccinations",
+    "Parasite Control",
+    "Dental Care",
+    "Surgical Procedures",
+    "Diagnostic Imaging (X-rays, Ultrasound)",
+    "Laboratory Testing (Bloodwork, Urinalysis)",
+    "Emergency Care",
+    "Nutritional Counseling",
+    "Behavioral Counseling",
+    "Microchipping",
+    "End-of-Life Care (Euthanasia)",
+    "Ayurvedic Consultation",
+    "Panchakarma Therapies",
+    "Herbal Medicine",
+    "Dietary and Lifestyle Counseling",
+    "Ayurvedic Massage",
+    "Detoxification",
+    "Stress Management",
+    "Yoga and Meditation",
+    "Dry Cupping",
+    "Wet Cupping",
+    "Massage Cupping",
+    "Cupping Therapy for Pain Relief",
+    "Cupping Therapy for Detoxification",
+    "Cupping Therapy for Respiratory Disorders",
+    "Cupping Therapy for Digestive Disorders",
+    "Cupping Therapy for Skin Conditions",
+    "Appendectomy",
+    "Hernia Repair",
+    "Gallbladder Surgery",
+    "Colon Surgery",
+    "Breast Surgery",
+    "Thyroid Surgery",
+    "Hemorrhoidectomy",
+    "Skin Lesion Removal",
+    "Laparoscopic Surgery",
+    "Endoscopy",
+    "Biopsy",
+    "Homoeopathic Consultation",
+    "Homoeopathic Medicine",
+    "Individualized Treatment Plans",
+    "Preventive Medicine",
+    "Internal Medicine Consultation",
+    "Disease Diagnosis and Management",
+    "Medication Management",
+    "Health Promotion",
+    "Health Education",
+    "Physical Rehabilitation",
+    "Pain Management",
+    "Post-surgery Rehabilitation",
+    "Geriatric Rehabilitation",
+    "Neurological Rehabilitation",
+    "Cardiac Rehabilitation",
+    "Pulmonary Rehabilitation",
+    "Pediatric Rehabilitation",
+    "Dentures",
+    "Implant-supported Dentures",
+    "Full Mouth Rehabilitation",
+    "Smile Makeover",
+    "Temporomandibular Joint (TMJ) Therapy",
+    "Maxillofacial Prosthetics",
+    "Root Canal Therapy (RCT)",
+    "Pulpotomy",
+    "Apicoectomy",
+    "Endodontic Retreatment",
+    "Dental Emergency Care for Root Canal Issues",
+    "Composite Fillings",
+    "Amalgam Fillings",
+    "Glass Ionomer Fillings",
+    "Ceramic Fillings",
+    "Temporary Fillings",
+    "Direct Fillings",
+    "Indirect Fillings",
+    "Core Build-ups",
+    "Simple Tooth Extraction",
+    "Surgical Tooth Extraction",
+    "Wisdom Teeth Extraction",
+    "Orthodontic Extraction",
+    "Emergency Tooth Extraction",
+];
 const CreateProfile = () => {
     const { user } = useSelector((state) => state.auth);
     const [inputImage, setInputImage] = useState("");
@@ -24,7 +176,6 @@ const CreateProfile = () => {
     const [profileDropDown, setProfileDropDown] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    console.log(user?.verification);
 
     const menuRef = useClickAwayToClose(() => setProfileDropDown(false));
 
@@ -35,11 +186,47 @@ const CreateProfile = () => {
     }, [inputImage]);
 
     const handleChange = (e, val) => {
-        const { name, value } = e.target;
-        setInputValue((prevState) => ({
-            ...prevState,
-            [name]: value,
-        }));
+        const { id } = e.target;
+
+        if (id === "services") {
+            // Toggle the selection of the service
+            const updatedServices = inputValue.services.includes(val)
+                ? inputValue.services.filter((item) => item !== val)
+                : [...inputValue.services, val];
+            setInputValue((prevState) => ({
+                ...prevState,
+                services: updatedServices,
+            }));
+            e.target.value = "";
+        } else {
+            const { name, value, id } = e.target;
+            if (id === "gender") {
+                return setInputValue((prevState) => ({
+                    ...prevState,
+                    [id]: val,
+                }));
+            }
+            if (name === "dateOfBirth") {
+                console.log(name, val);
+                return setInputValue((prevState) => ({
+                    ...prevState,
+                    [name]: val,
+                }));
+            }
+            setInputValue((prevState) => ({
+                ...prevState,
+                [name]: value,
+            }));
+        }
+    };
+
+    const handleRemoveOption = (optionToRemove) => {
+        setInputValue({
+            ...inputValue,
+            services: inputValue.services.filter(
+                (option) => option !== optionToRemove
+            ),
+        });
     };
 
     const checkStatus = useCallback(async () => {
@@ -70,32 +257,40 @@ const CreateProfile = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
+        const data = new FormData();
+        data.append("nameOfTheDoctor", inputValue.nameOfTheDoctor);
+        data.append("qulification", inputValue.qulification);
+        data.append("speciality", inputValue.speciality);
+        data.append("yearOfExprience", inputValue.yearOfExprience);
+        data.append("email", inputValue.email);
+        data.append("phone", inputValue.phone);
+        data.append("connsultationFee", inputValue.connsultationFee);
+        data.append("description", inputValue.description);
+        data.append("location", inputValue.location);
+        data.append("landmark", inputValue.landmark);
+        data.append("enterFullAddress", inputValue.enterFullAddress);
+        data.append("gender", inputValue.gender);
+        data.append("dateOfBirth", inputValue.dateOfBirth);
+        data.append("acceptAppointments", user?.acceptAppointments);
+        data.append("image", inputImage || user?.imgurl);
+        inputValue.services.forEach((service) => {
+            data.append("services", service);
+        });
 
-        let formData = new FormData();
-        formData.append(
-            "nameOfhospitalOrClinic",
-            inputValue.nameOfhospitalOrClinic
-        );
-        formData.append("hospitalType", inputValue.hospitalType);
-        formData.append("enterFullAddress", inputValue.enterFullAddress);
-        formData.append("location", inputValue.location);
-        formData.append("landmark", inputValue.landmark);
-        formData.append("image", inputImage);
-
+        // console.log(data);
         try {
             const response = await axiosClient.put(
-                `/v2/master/${user?._id}`,
-                formData
+                `/v2/editDoctorfile/${user?._id}`,
+                data
             );
-            console.log(response);
+
             if (response.status === "ok") {
+                toast.success("Updated");
                 dispatch(updateUserData(response.result));
-                toast.success("Profile Created Successfully");
-                // navigate(`/master/user/home/${hospital_id}`);
+                return;
             }
-        } catch (error) {
-            toast.error(error.message);
-            console.log(error);
+        } catch (e) {
+            toast.error(e.message);
         } finally {
             setLoading(false);
         }
@@ -170,16 +365,24 @@ const CreateProfile = () => {
             value: inputValue?.qulification,
         },
         {
+            type: "text",
+            placeholder: "Speciality",
+            name: "speciality",
+            classname: "",
+            autofocus: false,
+            value: inputValue?.speciality,
+        },
+        {
             type: "number",
-            placeholder: "Ex. 5",
+            placeholder: "Year Of Experience",
             name: "yearOfExprience",
             classname: "",
             autofocus: false,
             value: inputValue?.yearOfExprience,
         },
         {
-            type: "text",
-            placeholder: "Ex. 500",
+            type: "number",
+            placeholder: "Consultation Fee",
             name: "connsultationFee",
             classname: "",
             autofocus: false,
@@ -187,7 +390,7 @@ const CreateProfile = () => {
         },
         {
             type: "text",
-            placeholder: "Ex. Root Canal, Root Planning",
+            placeholder: "Services",
             name: "services",
             classname: "",
             autofocus: false,
@@ -311,23 +514,66 @@ const CreateProfile = () => {
                                             />
                                         </div>
                                     </label>
-                                    {formInputs?.map((input, i) => (
-                                        <div
-                                            key={input.name}
-                                            className="flex w-full flex-col gap-[10px]"
-                                        >
-                                            <Input1
-                                                type={input.type}
-                                                placeholder={input.placeholder}
+                                    {formInputs?.map((input, i) =>
+                                        input.name == "gender" ? (
+                                            <Select
+                                                id={input.name}
+                                                key={input.name}
+                                                options={input.options}
+                                                value={inputValue.gender}
+                                                setSelect={handleChange}
                                                 name={input.name}
-                                                autofocus={input.autofocus}
-                                                value={input.value}
-                                                onchange={handleChange}
-                                                required={true}
-                                                classname={`bg-white w-full`}
+                                                placeholder="Gender"
+                                                divClasses="w-full"
                                             />
-                                        </div>
-                                    ))}
+                                        ) : input.name == "dateOfBirth" ? (
+                                            <DatePicker
+                                                key={input.name}
+                                                name={input.name}
+                                                value={input.value}
+                                                callback={handleChange}
+                                                required
+                                                divClasses="w-full"
+                                                icon
+                                                inputClasses={
+                                                    "w-full outline-none border read-only:bg-[#ECF0F9] disabled:bg-[#5D5E61BD] disabled:text-white read-only:cursor-not-allowed border-c18 h-[40px] px-4 rounded-[5px] placeholder:text-c22 placeholder:font-f3 font-[500]"
+                                                }
+                                                placeholder={input.placeholder}
+                                            />
+                                        ) : input.name == "services" ? (
+                                            <MultiSelect
+                                                key={input.name}
+                                                handleChange={handleChange}
+                                                handleRemoveOption={
+                                                    handleRemoveOption
+                                                }
+                                                divClasses="w-full"
+                                                placeholder="Enter Services"
+                                                selectedOptions={
+                                                    inputValue.services
+                                                }
+                                                options={servisesOptions}
+                                            />
+                                        ) : (
+                                            <div
+                                                key={input.name}
+                                                className="flex w-full flex-col gap-[10px]"
+                                            >
+                                                <Input1
+                                                    type={input.type}
+                                                    placeholder={
+                                                        input.placeholder
+                                                    }
+                                                    name={input.name}
+                                                    autofocus={input.autofocus}
+                                                    value={input.value}
+                                                    onchange={handleChange}
+                                                    required={true}
+                                                    classname={`bg-white w-full`}
+                                                />
+                                            </div>
+                                        )
+                                    )}
                                     {/* <div className="flex items-center w-full -mt-2.5 gap-2">
                     <img src="/EditProfile/Location.svg" alt="icon" />
                     <FormSpan content="Use Current Location" />

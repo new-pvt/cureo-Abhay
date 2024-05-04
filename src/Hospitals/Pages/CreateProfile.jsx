@@ -152,35 +152,14 @@ const CreateProfile = () => {
             <div className="w-full h-full flex justify-center ">
                 <div className="w-full md:w-[35.37%]">
                     <Stepper
-                        createdProfile={
-                            user?.nameOfhospitalOrClinic ? true : false
-                        }
+                        createdProfile={user?.nameOfTheDoctor ? true : false}
                         verified={user?.verified ? true : false}
                     />
-                    {user?.user?.verification?.proof &&
-                    user?.verification?.status == "rejected" ? (
-                        <div></div>
-                    ) : user?.verification?.proof &&
-                      user?.verification?.status == "pending" ? (
-                        <div>
-                            <h2 className="font-f2 font-w2 text-center mt-5">
-                                Your Verifcation is in Process kindly Wait Until
-                                Your Verification Complete.
-                            </h2>
-                            <div className="w-full h-[600px] mt-[25px]">
-                                <img
-                                    src={user?.verification?.proof}
-                                    // type="application/pdf"
-                                    width="100%"
-                                    height="100%"
-                                />
-                            </div>
-                            {/* <iframe src={user?.proof} className="absolute" width="100%" height="600px" /> */}
-                        </div>
-                    ) : user?.nameOfhospitalOrClinic &&
-                      !user?.verification?.proof ? (
+                    {user?.verification.status == "Not Applied Yet" &&
+                    user?.nameOfhospitalOrClinic ? (
                         <UploadDocument />
-                    ) : (
+                    ) : user?.verification?.status == "Not Applied Yet" &&
+                      !user?.nameOfhospitalOrClinic ? (
                         <form onSubmit={handleSubmit} className="space-y-5">
                             <div className="w-full border border-[#D9D9D980] p-5 rounded-[5px] mt-[59px]">
                                 <h6 className="font-f2 font-w2 text-[15px] leading-[15.6px] mb-[5px] text-c11">
@@ -223,27 +202,56 @@ const CreateProfile = () => {
                                             />
                                         </div>
                                     </label>
-                                    {formInputs?.map((input, i) => (
-                                        <div
-                                            key={input.name}
-                                            className="flex w-full flex-col gap-[10px]"
-                                        >
-                                            <Input1
-                                                type={input.type}
-                                                placeholder={input.placeholder}
+                                    {formInputs?.map((input, i) =>
+                                        input.name == "gender" ? (
+                                            <Select
+                                                id={input.name}
+                                                key={input.name}
+                                                options={input.options}
+                                                value={inputValue.gender}
+                                                setSelect={handleChange}
                                                 name={input.name}
-                                                autofocus={input.autofocus}
-                                                value={input.value}
-                                                onchange={handleChange}
-                                                required={true}
-                                                classname={`bg-white w-full`}
+                                                placeholder="Gender"
+                                                divClasses="w-full"
                                             />
-                                        </div>
-                                    ))}
+                                        ) : input.name == "dateOfBirth" ? (
+                                            <DatePicker
+                                                key={input.name}
+                                                name={input.name}
+                                                value={input.value}
+                                                callback={handleChange}
+                                                required
+                                                divClasses="w-full"
+                                                icon
+                                                inputClasses={
+                                                    "w-full outline-none border read-only:bg-[#ECF0F9] disabled:bg-[#5D5E61BD] disabled:text-white read-only:cursor-not-allowed border-c18 h-[40px] px-4 rounded-[5px] placeholder:text-c22 placeholder:font-f3 font-[500]"
+                                                }
+                                                placeholder={input.placeholder}
+                                            />
+                                        ) : (
+                                            <div
+                                                key={input.name}
+                                                className="flex w-full flex-col gap-[10px]"
+                                            >
+                                                <Input1
+                                                    type={input.type}
+                                                    placeholder={
+                                                        input.placeholder
+                                                    }
+                                                    name={input.name}
+                                                    autofocus={input.autofocus}
+                                                    value={input.value}
+                                                    onchange={handleChange}
+                                                    required={true}
+                                                    classname={`bg-white w-full`}
+                                                />
+                                            </div>
+                                        )
+                                    )}
                                     {/* <div className="flex items-center w-full -mt-2.5 gap-2">
-                        <img src="/EditProfile/Location.svg" alt="icon" />
-                        <FormSpan content="Use Current Location" />
-                    </div> */}
+                    <img src="/EditProfile/Location.svg" alt="icon" />
+                    <FormSpan content="Use Current Location" />
+                </div> */}
                                 </div>
                             </div>
 
@@ -259,6 +267,40 @@ const CreateProfile = () => {
                                 disabled={loading}
                             />
                         </form>
+                    ) : user?.verification?.status == "rejected" ? (
+                        <div>
+                            <h2 className="text-center mt-5 font-f2 font-w2 text-c24">
+                                Your Application is Rejected The reason is
+                                mentioned below
+                            </h2>
+                            <h3 className="text-center mt-5 font-f2 font-w2 text-c24">
+                                Reason :- {user?.verification?.message}
+                            </h3>
+                            <UploadDocument />
+                        </div>
+                    ) : (
+                        <div>
+                            <h2 className="font-f2 font-w2 text-center mt-5">
+                                Your Verifcation is in Process kindly Wait Until
+                                Your Verification Complete.
+                            </h2>
+                            <PrimaryButton
+                                disabled={loading}
+                                loading={loading}
+                                content="Check Status"
+                                onclick={checkStatus}
+                                className="bg-c1 w-[130px] h-10 rounded-md text-c2 mx-auto block mt-3"
+                            />
+                            <div className="w-full h-[600px] mt-[25px]">
+                                <img
+                                    src={user?.verification?.proof}
+                                    // type="application/pdf"
+                                    width="100%"
+                                    height="100%"
+                                />
+                            </div>
+                            {/* <iframe src={user?.proof} className="absolute" width="100%" height="600px" /> */}
+                        </div>
                     )}
                 </div>
             </div>

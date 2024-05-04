@@ -15,7 +15,10 @@ const Home = () => {
             <Section3 />
             <Section4 />
             {/* <Section5 /> */}
+            <div className="-mt-[180px] md:mt-0">
             <ContactUs />
+
+            </div>
             {/* <Section6 /> */}
         </div>
     );

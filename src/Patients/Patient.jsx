@@ -30,6 +30,7 @@ import CancelledAppointmentDetails from "./Pages/CancelledAppointmentDetails";
 import TermsAndCondition from "./Pages/TermsAndCondition";
 import Privacy from "./Pages/Privacy";
 import CancellationPolicy from "./Pages/CancellationPolicy";
+import Practice from "./Pages/Practice";
 // import PrivacyPolicy from "./Pages/PrivacyPolicy";
 // import PrivacyPolicy from "./Pages/PrivacyPolicy";
 
@@ -57,6 +58,7 @@ const Patient = () => {
                     <Navbar />
                     <Routes>
                         <Route path="/" element={<Home />} />
+                        <Route path="/practice" element={<Practice />} />
                         <Route path="/find-doctors" element={<FindDoctors />} />
                         <Route
                             path="/patient/doctor-details/:doctorId"
