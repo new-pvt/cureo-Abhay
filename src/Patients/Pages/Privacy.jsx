@@ -15,7 +15,7 @@ const Privacy = () => {
     }, [location.pathname]);
 
     return (
-        <div>
+        <div className="p-4">
             <h1 className="text-center py-5 text-3xl font-f1 font-w3 text-c2  bg-c1">Privacy Policy</h1>
             <p className="font-f2 font-w1 md:text-[1rem]  text-c12 leading-[24px] md:px-[22px]">
                 Medidek is owned and managed by Medidek Healthcare pvt ltd

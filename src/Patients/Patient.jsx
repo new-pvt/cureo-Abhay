@@ -93,7 +93,6 @@ const Patient = () => {
                             path="/medidek/cancellation-policy"
                             element={<CancellationPolicy />}
                         />
-                        <Route path="/medidek/privacy" element={<Blogs />} />
                         <Route
                             path="/patient/create-profile"
                             element={<CreateProfile />}
