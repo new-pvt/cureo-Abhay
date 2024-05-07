@@ -277,7 +277,7 @@ const AddSlots = ({ date, appointmentBy, getScheduleData }) => {
     };
 
     return (
-        <form onSubmit={handleSave} className="space-y-[25px]">
+        <form onSubmit={handleSave} className="space-y-[25px] ">
             {appointmentBy == "slot" && (
                 <div className="w-full md:w-[calc(50%-10px)] space-y-3">
                     <label
@@ -538,8 +538,6 @@ const AddSlots = ({ date, appointmentBy, getScheduleData }) => {
                 disabled={
                     loading
                         ? true
-                        : inputValue.isholiday
-                          ? true
                           : doctor?.acceptAppointments == "byToken" &&
                               appointmentBy != "token"
                             ? true
@@ -549,7 +547,7 @@ const AddSlots = ({ date, appointmentBy, getScheduleData }) => {
                               : false
                 }
                 loading={loading}
-                className={`bg-c1 flex-1 text-c2 w-full font-f2 text-[13px] py-3 mx-auto block whitespace-nowrap mb-5`}
+                className={`bg-c1 flex-1 text-c2 w-full font-f2 text-[13px] h-10 mx-auto block whitespace-nowrap mb-5`}
                 // w={"132px"}
                 // h={"41px"}
                 bg={"c29"}

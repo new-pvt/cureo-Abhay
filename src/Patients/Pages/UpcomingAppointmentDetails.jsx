@@ -8,6 +8,7 @@ import Stepper from "../Components/Stepper";
 import PrimaryButton from "../../Common/Components/Buttons/PrimaryButton";
 import AppointCancelDialog from "../Components/Appointment/AppointCancelDialog";
 import AppointmentCancelledPopUp from "../Components/Appointment/AppointmentCancelledPopUp";
+import NotFound from "../../Common/Components/NotFound/NotFound";
 
 const UpcomingAppointmentDetails = () => {
     const { appointmentId } = useParams();
@@ -16,7 +17,19 @@ const UpcomingAppointmentDetails = () => {
     const [cancelAppointmentDialog, setCancelAppointmentDialog] =
         useState(false);
     const [loading, setLoading] = useState(false);
+    const [notFound, setNotFound] = useState(false);
     const [appointmentCancelled, setAppointmentCancelled] = useState(false);
+
+    const spacifcDate = moment(
+        `${appointment?.appointmentDate} ${appointment?.AppointmentTime?.split("-")[0]?.trim()}`,
+        "YYYY-MM-DD HH:mm"
+    );
+
+    const diffBetnTime = moment.duration(spacifcDate.diff(moment()));
+
+    const duration = moment
+        .duration(diffBetnTime.asMilliseconds(), "ms")
+        .humanize(true);
 
     const getPendingAppointmentsData = async () => {
         try {
@@ -25,15 +38,13 @@ const UpcomingAppointmentDetails = () => {
             );
             if (response.status === "ok") {
                 console.log(response.result);
-                // setTempDate(response.result.appointmentDate);
-                // setTempDate(
-                //     moment(response.result.appointmentDate).format("YYYY-MM-DD")
-                // );
-                // setTempDoctorId(response.result.doctorid._id);
                 return setAppointment(response.result);
             }
         } catch (error) {
             console.log(error);
+            if (error.message == "not appointment found") {
+                setNotFound(true);
+            }
         }
     };
 
@@ -63,6 +74,10 @@ const UpcomingAppointmentDetails = () => {
         getPendingAppointmentsData();
     }, []);
 
+    if (notFound) {
+        return <NotFound />;
+    }
+
     return (
         <div className="relative min-h-[calc(100vh-108px)] flex justify-center md:mt-[80px] md:mx-[26.56%]">
             <div className="md:w-[40%] h-[50%] blur-[120px] fixed bottom-0 right-0 -z-20 bg-gradient-to-l from-[#1F51C626] via-[#108ED638] to-[#1F51C638]"></div>
@@ -77,7 +92,7 @@ const UpcomingAppointmentDetails = () => {
                         />
                         <div className="flex flex-col gap-2">
                             <FormSpan
-                                content={"Appointment by slot"}
+                                content={`Appointment by ${appointment?.tokenNo ? "Token" : "Slot"}`}
                                 className={
                                     "font-w1 whitespace-nowrap text-[10px] w-fit text-[#1F51C6] bg-[#108ED647] px-2 py-[5px] rounded-[5px]"
                                 }
@@ -120,19 +135,21 @@ const UpcomingAppointmentDetails = () => {
                                     content={appointment?.doctorid?.location}
                                 />
                             </div>
-                            <div className="flex md:hidden items-center w-fit mt-1 md:mt-0 gap-1 bg-c7 top-[15px] right-[15px] p-[5px] rounded-[5px]">
-                                <img
-                                    src="/Find Doctors/AppointmentVerified.svg"
-                                    alt="img"
-                                    className="w-[11.08px]"
-                                />
-                                <FormSpan
-                                    content={"Appointment Completed"}
-                                    className={
-                                        "font-w1 whitespace-nowrap text-[10px]"
-                                    }
-                                />
-                            </div>
+                            {appointment?.status == "completed" && (
+                                <div className="flex md:hidden items-center w-fit mt-1 md:mt-0 gap-1 bg-c7 top-[15px] right-[15px] p-[5px] rounded-[5px]">
+                                    <img
+                                        src="/Find Doctors/AppointmentVerified.svg"
+                                        alt="img"
+                                        className="w-[11.08px]"
+                                    />
+                                    <FormSpan
+                                        content={"Appointment Completed"}
+                                        className={
+                                            "font-w1 whitespace-nowrap text-[10px]"
+                                        }
+                                    />
+                                </div>
+                            )}
                         </div>
                     </div>
                     <div className="p-5 flex flex-col md:flex-row md:items-center gap-4 border-y border-dashed">
@@ -142,12 +159,19 @@ const UpcomingAppointmentDetails = () => {
                         </div>
                         <div className="flex items-center gap-1">
                             <P3 content={"Estimated Time :"} />
-                            <Span content={"20 Minutes"} />
+                            <Span
+                                content={
+                                    appointment?.tokenNo
+                                        ? "Not Available"
+                                        : duration
+                                }
+                                className="capitalize"
+                            />
                         </div>
                     </div>
                     {/* Tracking UI */}
                     <Stepper stepperData={appointment} />
-                    <div className="hidden md:flex items-center w-fit mt-1 md:mt-0 gap-1 absolute bg-c7 top-[15px] right-[15px] p-[5px] rounded-[5px]">
+                    {/* <div className="hidden md:flex items-center w-fit mt-1 md:mt-0 gap-1 absolute bg-c7 top-[15px] right-[15px] p-[5px] rounded-[5px]">
                         <img
                             src="/Find Doctors/AppointmentVerified.svg"
                             alt="img"
@@ -157,7 +181,7 @@ const UpcomingAppointmentDetails = () => {
                             content={"Appointment Completed"}
                             className={"font-w1 whitespace-nowrap text-[10px]"}
                         />
-                    </div>
+                    </div> */}
                 </div>
                 <PrimaryButton
                     onclick={() => setCancelAppointmentDialog(true)}

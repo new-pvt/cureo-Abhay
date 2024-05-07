@@ -312,10 +312,10 @@ const EditPatientProfile = () => {
                             )
                         )}
                         <h1>{dayjs(user?.dateOfBirth)[0]}</h1>
-                        <div className="flex items-center w-full -mt-2.5 gap-2">
+                        {/* <div className="flex items-center w-full -mt-2.5 gap-2">
                             <img src="/EditProfile/Location.svg" alt="icon" />
                             <FormSpan content="Use Current Location" />
-                        </div>
+                        </div> */}
                         <div className="flex w-full gap-[15px]">
                             <PrimaryButton
                                 content={"Change Password"}
@@ -336,7 +336,7 @@ const EditPatientProfile = () => {
                                 bg={"c1"}
                                 color={"white"}
                                 radius={"44px"}
-                                disabled={!formDirty || loading}
+                               disabled={loading ? true : preview ? false : !formDirty ? true  : false }
                             />
                         </div>
                     </form>

@@ -1,5 +1,5 @@
 import React, { memo, useEffect, useRef, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import PrimaryButton from "../Components/Buttons/PrimaryButton";
 import { LinkText, P5, TextButton } from "../Components/Text/Textt";
 import { useSelector } from "react-redux";
@@ -14,6 +14,7 @@ const MobileNav = ({
     handleAuthClick,
 }) => {
     const { pathname } = useLocation();
+    const navigate = useNavigate()
     const { user, isLoggedIn } = useSelector((state) => state.auth);
     const [authCard, setAuthCard] = useState(false);
 
@@ -42,6 +43,8 @@ const MobileNav = ({
                                     ? user?.imgurl
                                     : "/Navbar/human.png"
                             }
+                            onclick={()=>{navigate('/patient/edit-profile'); setMenu(false)}}
+                            avatar="Edit"
                             className={"w-[56px] h-[56px] mx-auto"}
                         />
                         <P5

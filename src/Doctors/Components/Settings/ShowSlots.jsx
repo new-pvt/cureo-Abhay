@@ -5,13 +5,18 @@ import SettingsContext from "../../../Utils/Context/Doctor/SettingsContext";
 import { useSelector } from "react-redux";
 import EditSlots from "./EditSlots";
 
-const ShowSlots = ({ data }) => {
+const ShowSlots = ({ data, date }) => {
     const { doctor } = useSelector((state) => state.doctorsData);
     const { appointmentBy } = useContext(SettingsContext);
     const [editSlot, setEditSlot] = useState();
 
-    if (editSlot) return <EditSlots data={data} />;
-
+    if (editSlot) return <EditSlots data={data} date={date} />;
+    if (data?.isholiday)
+        return (
+            <h4 className="capitalize text-center font-f3 font-w3 text-c1 text-[13px] md:text-[15px]">
+                As Per Your Schedule This is your holiday !
+            </h4>
+        );
     return (
         <>
             {appointmentBy == "slot" && (

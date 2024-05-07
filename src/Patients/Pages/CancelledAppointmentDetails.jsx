@@ -77,7 +77,7 @@ const CancelledAppointmentDetails = () => {
                         />
                         <div className="flex flex-col gap-2">
                             <FormSpan
-                                content={"Appointment by slot"}
+                                content={`Appointment by ${appointment?.tokenNo ? "Token" : "Slot"}`}
                                 className={
                                     "font-w1 whitespace-nowrap text-[10px] w-fit text-[#1F51C6] bg-[#108ED647] px-2 py-[5px] rounded-[5px]"
                                 }
@@ -120,18 +120,23 @@ const CancelledAppointmentDetails = () => {
                                     content={appointment?.doctorid?.location}
                                 />
                             </div>
-                            <div className="flex md:hidden items-center w-fit mt-1 md:mt-0 gap-1 bg-c7 top-[15px] right-[15px] p-[5px] rounded-[5px]">
-                                <img
+                            <div className="flex md:hidden items-center w-fit mt-1 md:mt-0 gap-1 bg-c24 text-c2 top-[15px] right-[15px] p-[5px] rounded-[5px]">
+                                {/* <img
                                     src="/Find Doctors/AppointmentVerified.svg"
                                     alt="img"
                                     className="w-[11.08px]"
-                                />
-                                <FormSpan
-                                    content={"Appointment Completed"}
+                                /> */}
+                                <span
+                                    className='font-f3 font-w1 leading-[15.6px] text-[0.813rem] text-c2 cursor-pointer'
+                                >
+                                    Appointment {appointment?.status}
+                                </span>
+                                {/* <FormSpan
+                                    content={"Appointment Cancelled"}
                                     className={
-                                        "font-w1 whitespace-nowrap text-[10px]"
+                                        "font-w1 whitespace-nowrap text-[10px] text-[#ffffff]"
                                     }
-                                />
+                                /> */}
                             </div>
                         </div>
                     </div>
@@ -160,7 +165,11 @@ const CancelledAppointmentDetails = () => {
                     </div>
                 </div>
                 <PrimaryButton
-                    onclick={() => navigate(`/patient/doctor/${appointment?._id}/book_appointment`)}
+                    onclick={() =>
+                        navigate(
+                            `/patient/doctor/${appointment?.doctorid?._id}/book_appointment`
+                        )
+                    }
                     className={`bg-c1 text-c2 font-f2 font-w1 w-fit px-[53px] mx-auto block whitespace-nowrap my-5`}
                     // w={"132px"}
                     h={"40px"}

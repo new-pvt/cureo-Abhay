@@ -85,14 +85,15 @@ const Settings = () => {
         [date]
     );
 
-    // const isScheduled = useQuery({
-    //     queryKey: ["doctorsScheduleTime", appointmentBy],
-    //     queryFn: handleApiCalling,
-    // });
+    useEffect(() => {
+        setAppointmentBy(
+            doctor?.acceptAppointments == "bySlot" ? "slot" : "token"
+        );
+    }, [doctor]);
 
     return (
         <div className="w-full flex justify-center h-full">
-            <div className="w-full md:w-[52.4%] py-10 space-y-4">
+            <div className="w-full md:w-[52.4%] h-full py-10 space-y-4">
                 <div className="flex bg-c2 rounded-[59px]">
                     <PrimaryButton
                         content={"Slot Appointment"}
@@ -114,7 +115,7 @@ const Settings = () => {
                         radius={"44px"}
                     />
                 </div>
-                <div className="p-5 bg-c2 rounded-[5px] space-y-[25px]">
+                <div className="p-5 bg-c2 rounded-[5px] space-y-[25px] min-h-[90%] ">
                     <h6 className="font-f2 font-w1">
                         {appointmentBy == "slot" ? "Slot" : "Token"}{" "}
                         Appointments:
@@ -189,7 +190,7 @@ const Settings = () => {
                     {loading ? (
                         <LoadingDots />
                     ) : data ? (
-                        <ShowSlots data={data} appointmentBy={appointmentBy} />
+                        <ShowSlots data={data} appointmentBy={appointmentBy}  date={date}/>
                     ) : (
                         <AddSlots
                             date={date}

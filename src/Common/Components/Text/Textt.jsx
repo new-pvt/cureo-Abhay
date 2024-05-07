@@ -161,7 +161,7 @@ export const FormSpan = memo(({ content = "", className = "", onclick }) => {
     return (
         <span
             onClick={onclick}
-            className={`${className} font-f3 font-w1 leading-[15.6px] text-[0.813rem] text-c3 cursor-pointer `}
+            className={` font-f3 font-w1 leading-[15.6px] text-[0.813rem] text-c3 cursor-pointer ${className}`}
         >
             {content}
         </span>

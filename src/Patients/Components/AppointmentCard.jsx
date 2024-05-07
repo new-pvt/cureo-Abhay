@@ -17,7 +17,7 @@ const AppointmentCard = ({ appointment }) => {
                 />
                 <div className="flex flex-col gap-2">
                     <FormSpan
-                        content={"Appointment by slot"}
+                        content={`Appointment by ${appointment.tokenNo ? "Token" : "Slot"}`}
                         className={
                             "font-w1 whitespace-nowrap text-[10px] w-fit text-[#1F51C6] bg-[#108ED647] px-2 py-[5px] rounded-[5px]"
                         }
@@ -49,7 +49,11 @@ const AppointmentCard = ({ appointment }) => {
             <PrimaryButton
                 onclick={() =>
                     navigate(
-                        `/patient/appointments/${appointment?._id}/cancelled`
+                        appointment?.status == "pending"
+                            ? `/patient/appointments/${appointment?._id}/upcoming`
+                            : appointment?.status == "completed"
+                              ? `/patient/appointments/${appointment?._id}/completed`
+                              : `/patient/appointments/${appointment?._id}/cancelled`
                     )
                 }
                 className={"bg-c1 text-c2 font-f2 w-full md:w-[145px]"}

@@ -700,14 +700,18 @@ const DoctorDetails = () => {
                                                     <FaAngleRight size={16} />
                                                 </LinkTextWithIcon>
                                             )}
-                                        {isFormEnabled && (
-                                            <LinkTextWithIcon
-                                                to={`/patient/doctor/${state.showTimeSlot}/book_appointment`}
-                                                className=" whitespace-nowrap w-fit flex items-center text-c3"
-                                            >
-                                                Next <FaAngleRight size={16} />
-                                            </LinkTextWithIcon>
-                                        )}
+                                        {isFormEnabled &&
+                                            getSessionItem(
+                                                ACCEPT_APPOINTMENT
+                                            ) == "byToken" && (
+                                                <LinkTextWithIcon
+                                                    to={`/patient/doctor/${state.showTimeSlot}/book_appointment`}
+                                                    className=" whitespace-nowrap w-fit flex items-center text-c3"
+                                                >
+                                                    Next{" "}
+                                                    <FaAngleRight size={16} />
+                                                </LinkTextWithIcon>
+                                            )}
                                     </div>
                                 )}
                             </div>
@@ -1137,14 +1141,16 @@ const DoctorDetails = () => {
                                                 Next <FaAngleRight size={16} />
                                             </LinkTextWithIcon>
                                         )}
-                                    {isFormEnabled && (
-                                        <LinkTextWithIcon
-                                            to={`/patient/doctor/${state.showTimeSlot}/book_appointment`}
-                                            className=" whitespace-nowrap w-fit flex items-center text-c3"
-                                        >
-                                            Next <FaAngleRight size={16} />
-                                        </LinkTextWithIcon>
-                                    )}
+                                    {isFormEnabled &&
+                                        getSessionItem(ACCEPT_APPOINTMENT) ==
+                                            "byToken" && (
+                                            <LinkTextWithIcon
+                                                to={`/patient/doctor/${state.showTimeSlot}/book_appointment`}
+                                                className=" whitespace-nowrap w-fit flex items-center text-c3"
+                                            >
+                                                Next <FaAngleRight size={16} />
+                                            </LinkTextWithIcon>
+                                        )}
                                 </div>
                             )}
                         </div>

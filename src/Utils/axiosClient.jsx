@@ -22,7 +22,6 @@ export const axiosClient = axios.create({
 // });
 
 const AxiosInterceptor = ({ children }) => {
-
     const [isSet, setIsSet] = useState(false);
     const dispatch = useDispatch();
 
@@ -49,11 +48,10 @@ const AxiosInterceptor = ({ children }) => {
                 const statusCode = data.statusCode;
 
                 if (
-                    statusCode === 401 &&
-                    data.message === "Invalid access key" || 
-                    statusCode === 401 &&
-                    data.message === "'Authentication header is required'" 
-
+                    (statusCode === 401 &&
+                        data.message === "Invalid access key") ||
+                    (statusCode === 401 &&
+                        data.message === "'Authentication header is required'")
                 ) {
                     dispatch(logout());
                     removeItem(KEY_ACCESS_TOKEN);
@@ -101,4 +99,3 @@ const AxiosInterceptor = ({ children }) => {
 };
 
 export { AxiosInterceptor };
-

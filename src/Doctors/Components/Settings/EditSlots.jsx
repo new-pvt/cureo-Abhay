@@ -23,7 +23,6 @@ const EditSlots = ({ date, data, getScheduleData }) => {
     const [loading, setLoading] = useState(false);
     const { doctor } = useSelector((state) => state.doctorsData);
     const { appointmentBy } = useContext(SettingsContext);
-    console.log(appointmentBy);
 
     const [times, setTimes] = useState({
         startTimes1: null,
@@ -44,20 +43,6 @@ const EditSlots = ({ date, data, getScheduleData }) => {
         Endtime3: data?.Endtime3,
         isholiday: false,
     });
-
-    console.log(inputValue.Starttime1);
-    console.log(inputValue.Endtime1);
-    console.log(inputValue.Starttime2);
-    console.log(inputValue.Endtime2);
-    console.log(inputValue.Starttime3);
-    console.log(inputValue.Endtime3);
-
-    console.log(times.startTimes1);
-    console.log(times.startTimes2);
-    console.log(times.startTimes3);
-    console.log(times.startTimes);
-    console.log(times.startTimes);
-    console.log(times.startTimes1);
 
     const handleSelect = useCallback(
         (e, val) => {
@@ -300,6 +285,8 @@ const EditSlots = ({ date, data, getScheduleData }) => {
             }
         }
     };
+
+    console.log(times);
 
     return (
         <form onSubmit={handleSave} className="space-y-[25px]">

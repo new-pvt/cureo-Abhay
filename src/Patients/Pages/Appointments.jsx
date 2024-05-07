@@ -101,7 +101,9 @@ const Appointments = () => {
                 `/v2/getMissedAppointment/${user?._id}`
             );
 
-            if (response.status === "ok" && !response.result == []) {
+            console.log(response.result.length == 0);
+
+            if (response.status === "ok" && response.result.length == 0) {
                 return setNothingToShow(true);
             } else {
                 setNothingToShow(false);
