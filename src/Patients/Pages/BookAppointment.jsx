@@ -315,7 +315,6 @@ const BookAppointment = () => {
         } finally {
             return dispatch({ type: ACTION_TYPES.SLOT_API_ERROR });
         }
-
     };
 
     const getAvailableToken = async () => {
@@ -344,12 +343,10 @@ const BookAppointment = () => {
 
     useEffect(() => {
         if (acceptAppointment == "bySlot") {
-            console.log("BySLot");
             getAvailableSlots();
             return;
         }
         if (acceptAppointment == "byToken") {
-            console.log("byToken");
             getAvailableToken();
             return;
         }
@@ -451,53 +448,71 @@ const BookAppointment = () => {
                     />
                 )}
             </div>
-            <P3
-                content={"Patient Details"}
-                className={"text-c20 text-[15px]"}
-            />
-            <form onSubmit={handleSubmit} className="flex flex-col gap-[25px]">
-                {formInputs?.map((input, i) => (
-                    <div key={i} className="flex flex-col gap-[10px]">
-                        <P5 content={input.title} />
-                        <Input1
-                            disabled={
-                                (!isFormEnabled &&
-                                    acceptAppointment === "byTokens") ||
-                                state.doctorNotAvailable
-                            }
-                            type={input.type}
-                            placeholder={input.placeholder}
-                            name={input.name}
-                            autofocus={input.autofocus}
-                            value={input.value}
-                            onchange={handleChange}
-                            required={true}
-                            classname={`${input?.value ? "bg-c26 border-none text-c4" : "bg-white"}`}
-                        />
-                    </div>
-                ))}
-                {error.value && (
-                    <ErrorSpan
-                        content={error?.message}
-                        className={"-my-[10px] text-center text-c24"}
-                    />
-                )}
-                <PrimaryButton
-                    content={"Book Appointment"}
-                    type="submit"
-                    loading={loading}
-                    className={`bg-c1 font-f2 w-full md:w-[33.33%] mx-auto`}
-                    h={"45px"}
-                    bg={"c1"}
-                    color={"white"}
-                    radius={"44px"}
-                    disabled={
-                        loading ||
-                        state.doctorNotAvailable ||
-                        (!isFormEnabled && acceptAppointment == "byToken")
-                    }
+            {acceptAppointment == "byToken" &&
+            moment(
+                appointmentBookingDetails?.appointmentDate,
+                "DD MMM, ddd HH:mm"
+            ).format("DD-MM-YYYY") !== moment().format("DD-MM-YYYY") ? (
+                <P3
+                    content={"Tokens Are Available For Same Day Only"}
+                    className={"text-c20 text-[15px]"}
                 />
-            </form>
+            ) : (
+                <>
+                    <P3
+                        content={"Patient Details"}
+                        className={"text-c20 text-[15px]"}
+                    />
+                    <form
+                        onSubmit={handleSubmit}
+                        className="flex flex-col gap-[25px]"
+                    >
+                        {formInputs?.map((input, i) => (
+                            <div key={i} className="flex flex-col gap-[10px]">
+                                <P5 content={input.title} />
+                                <Input1
+                                    disabled={
+                                        (isFormEnabled === false &&
+                                            acceptAppointment === "byTokens") ||
+                                        state.doctorNotAvailable
+                                    }
+                                    type={input.type}
+                                    placeholder={input.placeholder}
+                                    name={input.name}
+                                    autofocus={input.autofocus}
+                                    value={input.value}
+                                    onchange={handleChange}
+                                    required={true}
+                                    classname={`${input?.value ? "bg-c26 border-none text-c4" : "bg-white"}`}
+                                />
+                            </div>
+                        ))}
+                        {error.value && (
+                            <ErrorSpan
+                                content={error?.message}
+                                className={"-my-[10px] text-center text-c24"}
+                            />
+                        )}
+                        <PrimaryButton
+                            content={"Book Appointment"}
+                            type="submit"
+                            loading={loading}
+                            className={`bg-c1 font-f2 w-full md:w-[33.33%] mx-auto`}
+                            h={"45px"}
+                            bg={"c1"}
+                            color={"white"}
+                            radius={"44px"}
+                            disabled={
+                                loading ||
+                                state.doctorNotAvailable ||
+                                (!isFormEnabled &&
+                                    acceptAppointment == "byToken")
+                            }
+                        />
+                    </form>
+                </>
+            )}
+
             {/* {!user && !isLoggedIn && <PatientLogIn />} */}
             {appointmentAlreadyExistDialog && (
                 <AppointmentAlreadyExistDialog

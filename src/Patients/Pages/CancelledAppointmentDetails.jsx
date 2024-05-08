@@ -126,9 +126,7 @@ const CancelledAppointmentDetails = () => {
                                     alt="img"
                                     className="w-[11.08px]"
                                 /> */}
-                                <span
-                                    className='font-f3 font-w1 leading-[15.6px] text-[0.813rem] text-c2 cursor-pointer'
-                                >
+                                <span className="font-f3 font-w1 leading-[15.6px] text-[0.813rem] text-c2 cursor-pointer">
                                     Appointment {appointment?.status}
                                 </span>
                                 {/* <FormSpan
@@ -152,16 +150,10 @@ const CancelledAppointmentDetails = () => {
                     </div>
                     {/* Tracking UI */}
                     <StepperForMissedAppointments stepperData={appointment} />
-                    <div className="hidden md:flex items-center w-fit mt-1 md:mt-0 gap-1 absolute bg-c7 top-[15px] right-[15px] p-[5px] rounded-[5px]">
-                        <img
-                            src="/Find Doctors/AppointmentVerified.svg"
-                            alt="img"
-                            className="w-[11.08px]"
-                        />
-                        <FormSpan
-                            content={"Appointment Completed"}
-                            className={"font-w1 whitespace-nowrap text-[10px]"}
-                        />
+                    <div className="hidden md:flex items-center w-fit mt-1 md:mt-0 gap-1 absolute bg-c24 top-[15px] right-[15px] p-[5px] rounded-[5px]">
+                        <span className="font-f3 font-w1 leading-[15.6px] text-[0.813rem] text-c2 ">
+                            Appointment {appointment?.status}
+                        </span>
                     </div>
                 </div>
                 <PrimaryButton

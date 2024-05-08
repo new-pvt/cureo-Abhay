@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { ErrorSpan, H7, P2, P3 } from "../../../Common/Components/Text/Textt";
 import BoxButton from "../../../Common/Components/Buttons/BoxButton";
 import LoadingDots from "../../../Common/Components/Animation/LoadingDots/LoadingDots";
@@ -46,8 +46,14 @@ const TokenCard = ({
                 const endTime = tokensData[`Endtime${i}`];
                 if (startTime && endTime) {
                     slots.push({
-                        startTime: moment(startTime, "HH:mm").format(),
-                        endTime: moment(endTime, "HH:mm").format(),
+                        startTime: moment(
+                            `${appointmentBookingDetails?.appointmentDate} ${startTime}`,
+                            "DD MMM, ddd HH:mm"
+                        ).format(),
+                        endTime: moment(
+                            `${appointmentBookingDetails?.appointmentDate} ${endTime}`,
+                            "DD MMM, ddd HH:mm"
+                        ).format(),
                     });
                 }
             }
@@ -58,7 +64,7 @@ const TokenCard = ({
     useEffect(() => {
         const timerID = setInterval(() => {
             setCurrentTime(moment());
-        }, 60000); // Update time every seconds
+        }, 60000); 
 
         // Clean up timer on component unmount
         return () => clearInterval(timerID);
@@ -71,12 +77,12 @@ const TokenCard = ({
     const updateFormStatus = () => {
         // Check if the current time is within 1 hour before the start of any time slot
         const isWithinSlot = timeSlots.some((slot) => {
+           
             const startTime = moment(slot.startTime);
             const endTime = moment(slot.endTime);
             const oneHourBeforeStartTime = moment(startTime)
                 .subtract(1, "hours")
                 .format();
-
             return (
                 currentTime.isBetween(oneHourBeforeStartTime) &&
                 currentTime.isBefore(endTime)
@@ -86,6 +92,38 @@ const TokenCard = ({
         // Enable or disable form based on whether the current time is within 1 hour before any time slot
         setIsFormEnabled(isWithinSlot);
     };
+
+    console.log(isFormEnabled)
+
+    const isOneHourBefore = useCallback(
+        (startTime, endTime) => {
+            return currentTime.isBetween(
+                moment(
+                    `${appointmentBookingDetails?.appointmentDate} ${startTime}`,
+                    "DD MMM, ddd HH:mm"
+                )
+                    .subtract(1, "hours")
+                    .format(),
+                moment(
+                    `${appointmentBookingDetails?.appointmentDate} ${endTime}`,
+                    "DD MMM, ddd HH:mm"
+                ).format()
+            );
+        },
+        [appointmentBookingDetails?.appointmentDate]
+    );
+
+    const isNotAvailable = useCallback(
+        (time) => {
+            return currentTime.isAfter(
+                moment(
+                    `${appointmentBookingDetails?.appointmentDate} ${time}`,
+                    "DD MMM, ddd HH:mm"
+                ).format()
+            );
+        },
+        [appointmentBookingDetails?.appointmentDate]
+    );
 
     return (
         <div className="border-y flex flex-col gap-5 border-dashed py-5 border-c25">
@@ -149,29 +187,24 @@ const TokenCard = ({
                                     name="AppointmentTime"
                                     value={`${tokensData?.Starttime1} - ${tokensData?.Endtime1}`}
                                     content={`${tokensData?.Starttime1} - ${tokensData?.Endtime1}`}
-                                    classname={`border border-c17 ${currentTime.isAfter(moment(tokensData?.Endtime1, "HH:mm").format()) ? "bg-[#5D5E61BD]" : "bg-c2"} w-[125px] cursor-default`}
+                                    classname={`border border-c17 ${
+                                        isOneHourBefore(
+                                            tokensData?.Starttime1,
+                                            tokensData?.Endtime1
+                                        ) === false
+                                            ? "bg-[#5D5E61BD]"
+                                            : "bg-c2"
+                                    } w-[125px] cursor-default`}
                                 />
                                 {isFormEnabled &&
-                                    currentTime.isBetween(
-                                        moment(tokensData?.Starttime1, "HH:mm")
-                                            .subtract(1, "hours")
-                                            .format(),
-                                        moment(
-                                            tokensData?.Endtime1,
-                                            "HH:mm"
-                                        ).format()
-                                    ) && (
+                                    isOneHourBefore(tokensData?.Starttime1) &&
+                                    !isNotAvailable(tokensData?.Starttime1) && (
                                         <ErrorSpan
                                             content={"Available"}
                                             className="block text-center mt-1 text-[#14D610]"
                                         />
                                     )}
-                                {currentTime.isAfter(
-                                    moment(
-                                        tokensData?.Endtime1,
-                                        "HH:mm"
-                                    ).format()
-                                ) && (
+                                {isNotAvailable(tokensData?.Endtime1) && (
                                     <ErrorSpan
                                         content={"Missed"}
                                         className="block text-center mt-1 text-c24"
@@ -190,29 +223,26 @@ const TokenCard = ({
                                     name="AppointmentTime"
                                     value={`${tokensData?.Starttime2} - ${tokensData?.Endtime2}`}
                                     content={`${tokensData?.Starttime2} - ${tokensData?.Endtime2}`}
-                                    classname={`border border-c17 ${currentTime.isAfter(moment(tokensData?.Endtime2, "HH:mm").format()) ? "bg-[#5D5E61BD]" : "bg-c2"} w-[125px] cursor-default`}
+                                    classname={`border border-c17 ${
+                                        isOneHourBefore(
+                                            tokensData?.Starttime2,
+                                            tokensData?.Endtime2
+                                        ) === false
+                                            ? "bg-[#5D5E61BD]"
+                                            : "bg-c2"
+                                    } w-[125px] cursor-default`}
                                 />
                                 {isFormEnabled &&
-                                    currentTime.isBetween(
-                                        moment(tokensData?.Starttime2, "HH:mm")
-                                            .subtract(1, "hours")
-                                            .format(),
-                                        moment(
-                                            tokensData?.Endtime2,
-                                            "HH:mm"
-                                        ).format()
+                                    isOneHourBefore(
+                                        tokensData?.Starttime2,
+                                        tokensData?.Endtime2
                                     ) && (
                                         <ErrorSpan
                                             content={"Available"}
                                             className="block text-center mt-1 text-[#14D610]"
                                         />
                                     )}
-                                {currentTime.isAfter(
-                                    moment(
-                                        tokensData?.Endtime2,
-                                        "HH:mm"
-                                    ).format()
-                                ) && (
+                                {isNotAvailable(tokensData?.Endtime2) && (
                                     <ErrorSpan
                                         content={"Missed"}
                                         className="block text-center mt-1 text-c24"
@@ -231,29 +261,26 @@ const TokenCard = ({
                                     name="AppointmentTime"
                                     value={`${tokensData?.Starttime3} - ${tokensData?.Endtime3}`}
                                     content={`${tokensData?.Starttime3} - ${tokensData?.Endtime3}`}
-                                    classname={`border border-c17 ${currentTime.isAfter(moment(tokensData?.Endtime3, "HH:mm").format()) ? "bg-[#5D5E61BD]" : "bg-c2"} w-[125px] cursor-default`}
+                                    classname={`border border-c17 ${
+                                        isOneHourBefore(
+                                            tokensData?.Starttime3,
+                                            tokensData?.Endtime3
+                                        ) === false
+                                            ? "bg-[#5D5E61BD]"
+                                            : "bg-c2"
+                                    } w-[125px] cursor-default`}
                                 />
                                 {isFormEnabled &&
-                                    currentTime.isBetween(
-                                        moment(tokensData?.Starttime3, "HH:mm")
-                                            .subtract(1, "hours")
-                                            .format(),
-                                        moment(
-                                            tokensData?.Endtime3,
-                                            "HH:mm"
-                                        ).format()
+                                    isOneHourBefore(
+                                        tokensData?.Starttime3,
+                                        tokensData?.Endtime3
                                     ) && (
                                         <ErrorSpan
                                             content={"Available"}
                                             className="block text-center mt-1 text-[#14D610]"
                                         />
                                     )}
-                                {currentTime.isAfter(
-                                    moment(
-                                        tokensData?.Endtime3,
-                                        "HH:mm"
-                                    ).format()
-                                ) && (
+                                {isNotAvailable(tokensData?.Endtime3) && (
                                     <ErrorSpan
                                         content={"Missed"}
                                         className="block text-center mt-1 text-c24"

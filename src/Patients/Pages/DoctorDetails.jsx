@@ -3,6 +3,7 @@ import React, {
     useCallback,
     useContext,
     useEffect,
+    useMemo,
     useReducer,
     useState,
 } from "react";
@@ -61,8 +62,14 @@ const DoctorDetails = () => {
                 const endTime = state?.tokensData[`Endtime${i}`];
                 if (startTime && endTime) {
                     slots.push({
-                        startTime: moment(startTime, "HH:mm").format(),
-                        endTime: moment(endTime, "HH:mm").format(),
+                        startTime: moment(
+                            `${appointmentBookingDetails?.appointmentDate} ${startTime}`,
+                            "DD MMM, ddd HH:mm"
+                        ).format(),
+                        endTime: moment(
+                            `${appointmentBookingDetails?.appointmentDate} ${endTime}`,
+                            "DD MMM, ddd HH:mm"
+                        ).format(),
                     });
                 }
             }
@@ -80,11 +87,11 @@ const DoctorDetails = () => {
     }, []);
 
     useEffect(() => {
-        updateFormStatus(); // Call updateFormStatus initially
+        updateFormStatus();
     }, [timeSlots, currentTime]);
 
     const updateFormStatus = () => {
-        // Check if the current time is within 1 hour before the start of any time slot
+       
         const isWithinSlot = timeSlots.some((slot) => {
             const startTime = moment(slot.startTime);
             const endTime = moment(slot.endTime);
@@ -98,7 +105,6 @@ const DoctorDetails = () => {
             );
         });
 
-        // Enable or disable form based on whether the current time is within 1 hour before any time slot
         setIsFormEnabled(isWithinSlot);
     };
 
@@ -223,7 +229,7 @@ const DoctorDetails = () => {
             removeSessionItem(ACCEPT_APPOINTMENT);
             setAppointmentBookingDetails({
                 ...appointmentBookingDetails,
-                appointmentDate: "",
+                appointmentDate: moment().format("DD MMM, ddd"),
             });
         }
     };
@@ -258,8 +264,6 @@ const DoctorDetails = () => {
         }
     };
 
-    console.log(appointmentBookingDetails?.appointmentDate);
-
     useEffect(() => {
         if (state.showTimeSlot != 0) {
             if (getSessionItem(ACCEPT_APPOINTMENT) == "byToken") {
@@ -289,14 +293,48 @@ const DoctorDetails = () => {
         dispatch({ type: ACTION_TYPES.SET_DATES, payload: datesArray });
     };
 
-    const isNotAvailable = (time) => {
-        return currentTime.isAfter(
-            moment(
-                `${appointmentBookingDetails?.appointmentDate} ${time}`,
-                "DD MMM, ddd HH:mm"
-            ).format()
-        );
-    };
+    const isNotAvailable = useCallback(
+        (time) => {
+            return currentTime.isAfter(
+                moment(
+                    `${appointmentBookingDetails?.appointmentDate} ${time}`,
+                    "DD MMM, ddd HH:mm"
+                ).format()
+            );
+        },
+        [appointmentBookingDetails?.appointmentDate]
+    );
+
+    const isOneHourBefore = useCallback(
+        (startTime, endTime) => {
+            console.log(startTime)
+            console.log(
+                currentTime.isBetween(
+                    moment(
+                        `${appointmentBookingDetails?.appointmentDate} ${startTime}`,
+                        "DD MMM, ddd HH:mm"
+                    ).subtract(1, "hours"),
+                    moment(
+                        `${appointmentBookingDetails?.appointmentDate} ${endTime}`,
+                        "DD MMM, ddd HH:mm"
+                    )
+                )
+            );
+            return currentTime.isBetween(
+                moment(
+                    `${appointmentBookingDetails?.appointmentDate} ${startTime}`,
+                    "DD MMM, ddd HH:mm"
+                )
+                    .subtract(1, "hours")
+                    .format(),
+                moment(
+                    `${appointmentBookingDetails?.appointmentDate} ${endTime}`,
+                    "DD MMM, ddd HH:mm"
+                ).format()
+            );
+        },
+        [appointmentBookingDetails?.appointmentDate]
+    );
 
     return (
         <div className="overflow-x-hidden flex gap-5 relative min-h-[calc(100vh-108px)] my-[40px] px-4 md:px-[50px]">
@@ -371,7 +409,7 @@ const DoctorDetails = () => {
                                             }
                                             className="flex items-center gap-[5px] mt-2 mb-3 select-none"
                                         >
-                                            <FormSpan content="Pick a Time Slotttt" />
+                                            <FormSpan content="Pick a Time Slot" />
                                             {state.showTimeSlot ==
                                             hospital?._id ? (
                                                 <FaAngleUp
@@ -454,6 +492,7 @@ const DoctorDetails = () => {
                                               ACCEPT_APPOINTMENT
                                           ) == "byToken" ? (
                                             <div className="flex gap-x-2.5 gap-y-[27px] flex-wrap max-h-[200px]  overflow-x-auto no-scrollbar pb-2">
+                                                {/* show tokens */}
                                                 {state?.tokensData
                                                     ?.Starttime1 && (
                                                     <div>
@@ -468,27 +507,29 @@ const DoctorDetails = () => {
                                                             name="AppointmentTime"
                                                             value={`${state?.tokensData?.Starttime1} - ${state?.tokensData?.Endtime1}`}
                                                             content={`${state?.tokensData?.Starttime1} - ${state?.tokensData?.Endtime1}`}
-                                                            classname={`border border-c17 ${currentTime.isAfter(moment(state?.tokensData?.Endtime1, "HH:mm").format()) ? "bg-[#5D5E61BD]" : "bg-c2"} w-[125px] cursor-default`}
-                                                        />
-                                                        {isFormEnabled &&
-                                                            currentTime.isBetween(
-                                                                moment(
+                                                            classname={`border border-c17 ${
+                                                                isOneHourBefore(
                                                                     state
                                                                         ?.tokensData
                                                                         ?.Starttime1,
-                                                                    "HH:mm"
-                                                                )
-                                                                    .subtract(
-                                                                        1,
-                                                                        "hours"
-                                                                    )
-                                                                    .format(),
-                                                                moment(
                                                                     state
                                                                         ?.tokensData
-                                                                        ?.Endtime1,
-                                                                    "HH:mm"
-                                                                ).format()
+                                                                        ?.Endtime1
+                                                                ) === false
+                                                                    ? "bg-[#5D5E61BD]"
+                                                                    : "bg-c2"
+                                                            } w-[125px] cursor-default`}
+                                                        />
+                                                        {isFormEnabled &&
+                                                            isOneHourBefore(
+                                                                state
+                                                                    ?.tokensData
+                                                                    ?.Starttime1
+                                                            ) &&
+                                                            !isNotAvailable(
+                                                                state
+                                                                    ?.tokensData
+                                                                    ?.Starttime1
                                                             ) && (
                                                                 <ErrorSpan
                                                                     content={
@@ -497,13 +538,9 @@ const DoctorDetails = () => {
                                                                     className="block text-center mt-1 text-[#14D610]"
                                                                 />
                                                             )}
-                                                        {currentTime.isAfter(
-                                                            moment(
-                                                                state
-                                                                    ?.tokensData
-                                                                    ?.Endtime1,
-                                                                "HH:mm"
-                                                            ).format()
+                                                        {isNotAvailable(
+                                                            state?.tokensData
+                                                                ?.Endtime1
                                                         ) && (
                                                             <ErrorSpan
                                                                 content={
@@ -528,27 +565,27 @@ const DoctorDetails = () => {
                                                             name="AppointmentTime"
                                                             value={`${state?.tokensData?.Starttime2} - ${state?.tokensData?.Endtime2}`}
                                                             content={`${state?.tokensData?.Starttime2} - ${state?.tokensData?.Endtime2}`}
-                                                            classname={`border border-c17 ${currentTime.isAfter(moment(state?.tokensData?.Endtime2, "HH:mm").format()) ? "bg-[#5D5E61BD]" : "bg-c2"} w-[125px] cursor-default`}
-                                                        />
-                                                        {isFormEnabled &&
-                                                            currentTime.isBetween(
-                                                                moment(
+                                                            classname={`border border-c17 ${
+                                                                isOneHourBefore(
                                                                     state
                                                                         ?.tokensData
                                                                         ?.Starttime2,
-                                                                    "HH:mm"
-                                                                )
-                                                                    .subtract(
-                                                                        1,
-                                                                        "hours"
-                                                                    )
-                                                                    .format(),
-                                                                moment(
                                                                     state
                                                                         ?.tokensData
-                                                                        ?.Endtime2,
-                                                                    "HH:mm"
-                                                                ).format()
+                                                                        ?.Endtime2
+                                                                ) === false
+                                                                    ? "bg-[#5D5E61BD]"
+                                                                    : "bg-c2"
+                                                            } w-[125px] cursor-default`}
+                                                        />
+                                                        {isFormEnabled &&
+                                                            isOneHourBefore(
+                                                                state
+                                                                    ?.tokensData
+                                                                    ?.Starttime2,
+                                                                state
+                                                                    ?.tokensData
+                                                                    ?.Endtime2
                                                             ) && (
                                                                 <ErrorSpan
                                                                     content={
@@ -557,13 +594,9 @@ const DoctorDetails = () => {
                                                                     className="block text-center mt-1 text-[#14D610]"
                                                                 />
                                                             )}
-                                                        {currentTime.isAfter(
-                                                            moment(
-                                                                state
-                                                                    ?.tokensData
-                                                                    ?.Endtime2,
-                                                                "HH:mm"
-                                                            ).format()
+                                                         {isNotAvailable(
+                                                            state?.tokensData
+                                                                ?.Endtime2
                                                         ) && (
                                                             <ErrorSpan
                                                                 content={
@@ -588,27 +621,27 @@ const DoctorDetails = () => {
                                                             name="AppointmentTime"
                                                             value={`${state?.tokensData?.Starttime3} - ${state?.tokensData?.Endtime3}`}
                                                             content={`${state?.tokensData?.Starttime3} - ${state?.tokensData?.Endtime3}`}
-                                                            classname={`border border-c17 ${currentTime.isAfter(moment(state?.tokensData?.Endtime3, "HH:mm").format()) ? "bg-[#5D5E61BD]" : "bg-c2"} w-[125px] cursor-default`}
-                                                        />
-                                                        {isFormEnabled &&
-                                                            currentTime.isBetween(
-                                                                moment(
+                                                            classname={`border border-c17 ${
+                                                                isOneHourBefore(
                                                                     state
                                                                         ?.tokensData
                                                                         ?.Starttime3,
-                                                                    "HH:mm"
-                                                                )
-                                                                    .subtract(
-                                                                        1,
-                                                                        "hours"
-                                                                    )
-                                                                    .format(),
-                                                                moment(
                                                                     state
                                                                         ?.tokensData
-                                                                        ?.Endtime3,
-                                                                    "HH:mm"
-                                                                ).format()
+                                                                        ?.Endtime3
+                                                                ) === false
+                                                                    ? "bg-[#5D5E61BD]"
+                                                                    : "bg-c2"
+                                                            } w-[125px] cursor-default`}
+                                                        />
+                                                        {isFormEnabled &&
+                                                            isOneHourBefore(
+                                                                state
+                                                                    ?.tokensData
+                                                                    ?.Starttime3,
+                                                                state
+                                                                    ?.tokensData
+                                                                    ?.Endtime3
                                                             ) && (
                                                                 <ErrorSpan
                                                                     content={
@@ -617,13 +650,9 @@ const DoctorDetails = () => {
                                                                     className="block text-center mt-1 text-[#14D610]"
                                                                 />
                                                             )}
-                                                        {currentTime.isAfter(
-                                                            moment(
-                                                                state
-                                                                    ?.tokensData
-                                                                    ?.Endtime3,
-                                                                "HH:mm"
-                                                            ).format()
+                                                        {isNotAvailable(
+                                                            state?.tokensData
+                                                                ?.Endtime3
                                                         ) && (
                                                             <ErrorSpan
                                                                 content={
@@ -751,12 +780,12 @@ const DoctorDetails = () => {
                 </div>
                 {state.services ? (
                     <div className="flex flex-col gap-[20px]">
-                        {Array.from({ length: 5 }).map((_, i) => (
+                        {state?.doctorInfo?.services?.map((item, i) => (
                             <p
                                 key={i}
                                 className="text-c16 font-f3 font-w1 text-[13px]"
                             >
-                                {i + 1}. Root Canal
+                                {i + 1}. {item}
                             </p>
                         ))}
                     </div>
@@ -912,47 +941,48 @@ const DoctorDetails = () => {
                                                         name="AppointmentTime"
                                                         value={`${state?.tokensData?.Starttime1} - ${state?.tokensData?.Endtime1}`}
                                                         content={`${state?.tokensData?.Starttime1} - ${state?.tokensData?.Endtime1}`}
-                                                        classname={`border border-c17 ${currentTime.isAfter(moment(state?.tokensData?.Endtime1, "HH:mm").format()) ? "bg-[#5D5E61BD]" : "bg-c2"} w-[125px] cursor-default`}
-                                                    />
-                                                    {isFormEnabled &&
-                                                        currentTime.isBetween(
-                                                            moment(
+                                                        classname={`border border-c17 ${
+                                                            isOneHourBefore(
                                                                 state
                                                                     ?.tokensData
                                                                     ?.Starttime1,
-                                                                "HH:mm"
-                                                            )
-                                                                .subtract(
-                                                                    1,
-                                                                    "hours"
-                                                                )
-                                                                .format(),
-                                                            moment(
                                                                 state
                                                                     ?.tokensData
-                                                                    ?.Endtime1,
-                                                                "HH:mm"
-                                                            ).format()
+                                                                    ?.Endtime1
+                                                            ) === false
+                                                                ? "bg-[#5D5E61BD]"
+                                                                : "bg-c2"
+                                                        } w-[125px] cursor-default`}
+                                                    />
+                                                    {isFormEnabled &&
+                                                            isOneHourBefore(
+                                                                state
+                                                                    ?.tokensData
+                                                                    ?.Starttime1
+                                                            ) &&
+                                                            !isNotAvailable(
+                                                                state
+                                                                    ?.tokensData
+                                                                    ?.Starttime1
+                                                            ) && (
+                                                                <ErrorSpan
+                                                                    content={
+                                                                        "Available"
+                                                                    }
+                                                                    className="block text-center mt-1 text-[#14D610]"
+                                                                />
+                                                            )}
+                                                       {isNotAvailable(
+                                                            state?.tokensData
+                                                                ?.Endtime1
                                                         ) && (
                                                             <ErrorSpan
                                                                 content={
-                                                                    "Available"
+                                                                    "Missed"
                                                                 }
-                                                                className="block text-center mt-1 text-[#14D610]"
+                                                                className="block text-center mt-1 text-c24"
                                                             />
                                                         )}
-                                                    {currentTime.isAfter(
-                                                        moment(
-                                                            state?.tokensData
-                                                                ?.Endtime1,
-                                                            "HH:mm"
-                                                        ).format()
-                                                    ) && (
-                                                        <ErrorSpan
-                                                            content={"Missed"}
-                                                            className="block text-center mt-1 text-c24"
-                                                        />
-                                                    )}
                                                 </div>
                                             )}
                                             {state?.tokensData?.Starttime2 && (
@@ -968,27 +998,27 @@ const DoctorDetails = () => {
                                                         name="AppointmentTime"
                                                         value={`${state?.tokensData?.Starttime2} - ${state?.tokensData?.Endtime2}`}
                                                         content={`${state?.tokensData?.Starttime2} - ${state?.tokensData?.Endtime2}`}
-                                                        classname={`border border-c17 ${currentTime.isAfter(moment(state?.tokensData?.Endtime2, "HH:mm").format()) ? "bg-[#5D5E61BD]" : "bg-c2"} w-[125px] cursor-default`}
-                                                    />
-                                                    {isFormEnabled &&
-                                                        currentTime.isBetween(
-                                                            moment(
+                                                        classname={`border border-c17 ${
+                                                            isOneHourBefore(
                                                                 state
                                                                     ?.tokensData
                                                                     ?.Starttime2,
-                                                                "HH:mm"
-                                                            )
-                                                                .subtract(
-                                                                    1,
-                                                                    "hours"
-                                                                )
-                                                                .format(),
-                                                            moment(
                                                                 state
                                                                     ?.tokensData
-                                                                    ?.Endtime2,
-                                                                "HH:mm"
-                                                            ).format()
+                                                                    ?.Endtime2
+                                                            ) === false
+                                                                ? "bg-[#5D5E61BD]"
+                                                                : "bg-c2"
+                                                        } w-[125px] cursor-default`}
+                                                    />
+                                                    {isFormEnabled &&
+                                                        isOneHourBefore(
+                                                            state
+                                                                ?.tokensData
+                                                                ?.Starttime2,
+                                                            state
+                                                                ?.tokensData
+                                                                ?.Endtime2
                                                         ) && (
                                                             <ErrorSpan
                                                                 content={
@@ -997,15 +1027,14 @@ const DoctorDetails = () => {
                                                                 className="block text-center mt-1 text-[#14D610]"
                                                             />
                                                         )}
-                                                    {currentTime.isAfter(
-                                                        moment(
-                                                            state?.tokensData
-                                                                ?.Endtime2,
-                                                            "HH:mm"
-                                                        ).format()
+                                                     {isNotAvailable(
+                                                        state?.tokensData
+                                                            ?.Endtime2
                                                     ) && (
                                                         <ErrorSpan
-                                                            content={"Missed"}
+                                                            content={
+                                                                "Missed"
+                                                            }
                                                             className="block text-center mt-1 text-c24"
                                                         />
                                                     )}
@@ -1024,27 +1053,27 @@ const DoctorDetails = () => {
                                                         name="AppointmentTime"
                                                         value={`${state?.tokensData?.Starttime3} - ${state?.tokensData?.Endtime3}`}
                                                         content={`${state?.tokensData?.Starttime3} - ${state?.tokensData?.Endtime3}`}
-                                                        classname={`border border-c17 ${currentTime.isAfter(moment(state?.tokensData?.Endtime3, "HH:mm").format()) ? "bg-[#5D5E61BD]" : "bg-c2"} w-[125px] cursor-default`}
-                                                    />
-                                                    {isFormEnabled &&
-                                                        currentTime.isBetween(
-                                                            moment(
+                                                        classname={`border border-c17 ${
+                                                            isOneHourBefore(
                                                                 state
                                                                     ?.tokensData
                                                                     ?.Starttime3,
-                                                                "HH:mm"
-                                                            )
-                                                                .subtract(
-                                                                    1,
-                                                                    "hours"
-                                                                )
-                                                                .format(),
-                                                            moment(
                                                                 state
                                                                     ?.tokensData
-                                                                    ?.Endtime3,
-                                                                "HH:mm"
-                                                            ).format()
+                                                                    ?.Endtime3
+                                                            ) === false
+                                                                ? "bg-[#5D5E61BD]"
+                                                                : "bg-c2"
+                                                        } w-[125px] cursor-default`}
+                                                    />
+                                                    {isFormEnabled &&
+                                                        isOneHourBefore(
+                                                            state
+                                                                ?.tokensData
+                                                                ?.Starttime3,
+                                                            state
+                                                                ?.tokensData
+                                                                ?.Endtime3
                                                         ) && (
                                                             <ErrorSpan
                                                                 content={
@@ -1053,15 +1082,14 @@ const DoctorDetails = () => {
                                                                 className="block text-center mt-1 text-[#14D610]"
                                                             />
                                                         )}
-                                                    {currentTime.isAfter(
-                                                        moment(
-                                                            state?.tokensData
-                                                                ?.Endtime3,
-                                                            "HH:mm"
-                                                        ).format()
+                                                    {isNotAvailable(
+                                                        state?.tokensData
+                                                            ?.Endtime3
                                                     ) && (
                                                         <ErrorSpan
-                                                            content={"Missed"}
+                                                            content={
+                                                                "Missed"
+                                                            }
                                                             className="block text-center mt-1 text-c24"
                                                         />
                                                     )}
@@ -1084,9 +1112,8 @@ const DoctorDetails = () => {
                                                 ) : (
                                                     state.slotsData?.map(
                                                         (slot, i) => (
-                                                            <div>
+                                                            <div key={i}>
                                                                 <BoxButton
-                                                                    key={i}
                                                                     disabled={
                                                                         slot.isbooked ||
                                                                         isNotAvailable(

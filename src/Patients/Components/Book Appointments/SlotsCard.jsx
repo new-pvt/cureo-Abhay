@@ -58,9 +58,18 @@ const SlotsCard = ({
         [appointmentBookingDetails?.appointmentDate]
     );
 
-    const isNotAvailable = (time) => {
-        return currentTime.isAfter(moment(time, "HH:mm").format());
-    };
+    const isNotAvailable = useCallback(
+        (time) => {
+            return currentTime.isAfter(
+                moment(
+                    `${appointmentBookingDetails?.appointmentDate} ${time}`,
+                    "DD MMM, ddd HH:mm"
+                ).format()
+            );
+        },
+        [appointmentBookingDetails?.appointmentDate]
+    );
+
 
     return (
         <div className="border-y flex flex-col gap-5 border-dashed py-5 border-c25">
