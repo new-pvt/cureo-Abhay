@@ -24,7 +24,7 @@ const CreateProfile = () => {
     const [preview, setPreview] = useState("");
     const [loading, setLoading] = useState(false);
     const [formDirty, setFormDirty] = useState(false);
-    const [currentStep, setCurrentStep] = useState(1);
+    const [currentStep, setCurrentStep] = useState(0);
     const [inputValue, setInputValue] = useState({
         name: user?.name || "",
         email: user?.email || "",
@@ -291,13 +291,13 @@ const CreateProfile = () => {
                                 )
                             )}
                             <h1>{dayjs(user?.dateOfBirth)[0]}</h1>
-                            <div className="flex items-center w-full -mt-2.5 gap-2">
+                            {/* <div className="flex items-center w-full -mt-2.5 gap-2">
                                 <img
                                     src="/EditProfile/Location.svg"
                                     alt="icon"
                                 />
                                 <FormSpan content="Use Current Location" />
-                            </div>
+                            </div> */}
                             <div className="flex w-full gap-[15px]">
                                 <PrimaryButton
                                     content={"Skip"}

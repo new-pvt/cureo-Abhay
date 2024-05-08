@@ -1,55 +1,19 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { FormSpan, H7, Span } from "../../Common/Components/Text/Textt";
+import { H7, Span } from "../../Common/Components/Text/Textt";
 import Avatar from "../../Common/Components/Avatar/Avatar";
 import { useDispatch, useSelector } from "react-redux";
 import { Input1 } from "../../Common/Components/Inputs/Inputs";
 import PrimaryButton from "../../Common/Components/Buttons/PrimaryButton";
 import ChangePassword from "../Components/EditProfile/ChangePassword";
-import {
-    DateField,
-    LocalizationProvider,
-    MobileDatePicker,
-} from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { styled } from "@mui/material";
 import dayjs from "dayjs";
-import moment from "moment";
 import Select from "../../Common/Components/Inputs/Select";
 import { axiosClient } from "../../Utils/axiosClient";
 import toast from "react-hot-toast";
 import { updateUserData } from "../../Utils/Store/authSlice";
 import DatePicker from "../../Common/Components/Inputs/DatePicker";
 
-const DatePickerStyleForMobile = styled(MobileDatePicker)({
-    color: "red",
-    width: "100%",
-    [`& input`]: {
-        color: "#383838",
-        fontFamily: "Poppins",
-        fontWeight: "500",
-        fontSize: "13px",
-        // textAlign: "center",
-        marginTop: "3px",
-        outline: "none",
-        width: "100%",
-    },
-
-    [`& input:focus div`]: {
-        color: "red",
-        border: "red",
-        outline: "none",
-    },
-    [`& div`]: {
-        height: "38.02px",
-        width: "100%",
-    },
-    [`& fieldset`]: {
-        // borderRadius: "80px",
-    },
-});
-
 const EditPatientProfile = () => {
-    const { user, isLoggedIn } = useSelector((state) => state.auth);
+    const { user } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const [changePassword, setChangePassword] = useState(false);
     const [date, setDate] = useState("");
@@ -66,8 +30,6 @@ const EditPatientProfile = () => {
         location: user?.location || "",
     });
     const [formDirty, setFormDirty] = useState(false);
-
-    console.log(inputValue);
 
     const formInputs = [
         {
@@ -203,7 +165,7 @@ const EditPatientProfile = () => {
                 setLoading(false);
             }
         },
-        [inputValue]
+        [inputValue, inputImage]
     );
 
     useEffect(() => {
@@ -336,7 +298,15 @@ const EditPatientProfile = () => {
                                 bg={"c1"}
                                 color={"white"}
                                 radius={"44px"}
-                               disabled={loading ? true : preview ? false : !formDirty ? true  : false }
+                                disabled={
+                                    loading
+                                        ? true
+                                        : preview
+                                          ? false
+                                          : !formDirty
+                                            ? true
+                                            : false
+                                }
                             />
                         </div>
                     </form>

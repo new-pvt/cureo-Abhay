@@ -25,10 +25,6 @@ const AxiosInterceptor = ({ children }) => {
     const [isSet, setIsSet] = useState(false);
     const dispatch = useDispatch();
 
-    const { isLoggedIn, needToAuthenticate } = useSelector(
-        (state) => state.auth
-    );
-
     useEffect(() => {
         const requestInterceptor = axiosClient.interceptors.request.use(
             (request) => {
