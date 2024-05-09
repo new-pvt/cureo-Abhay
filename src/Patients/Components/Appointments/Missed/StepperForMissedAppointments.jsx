@@ -8,8 +8,7 @@ import { Span } from "../../../../Common/Components/Text/Textt";
 import moment from "moment";
 
 const StepperForMissedAppointments = ({ stepperData }) => {
-
-    console.log(stepperData.remark)
+    console.log(stepperData.remark);
     return (
         <>
             {/* Stepper For Web */}
@@ -33,8 +32,11 @@ const StepperForMissedAppointments = ({ stepperData }) => {
                             className="z-10 rotate-45"
                         />
                     </div>
-                    <p className="font-f3 font-w1 text-center">
-                        Appointment Cancelled by you
+                    <p className="font-f3 font-w1 text-[13px] mt-2 capitalize">
+                        Appointment {stepperData?.status}{" "}
+                        {stepperData?.remark == "by patient"
+                            ? "by you"
+                            : stepperData?.remark}
                     </p>
                 </div>
                 <div className={`step-item`}>
@@ -79,7 +81,10 @@ const StepperForMissedAppointments = ({ stepperData }) => {
                     </div>
                     <div>
                         <p className="font-f3 font-w1 text-[13px] mt-2 capitalize">
-                            Appointment {stepperData?.status} {stepperData?.remark == "by patient" ? "by you" : stepperData?.remark}
+                            Appointment {stepperData?.status}{" "}
+                            {stepperData?.remark == "by patient"
+                                ? "by you"
+                                : stepperData?.remark}
                         </p>
                     </div>
                 </div>

@@ -50,9 +50,12 @@ const UpcomingAppointmentDetails = () => {
 
     const cancelAppointment = async () => {
         setLoading(true);
+        const url = appointment?.tokenNo
+            ? "updateAppointmentByTokenUserAppointmentStatus"
+            : "updateUserAppointmentStatus";
         try {
             const response = await axiosClient.put(
-                `/v2/updateUserAppointmentStatus/${appointmentId}`,
+                `/v2/${url}/${appointmentId}`,
                 { status: "cancelled", remark: "by patient" }
             );
             if (response.status === "ok") {

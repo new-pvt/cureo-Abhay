@@ -190,7 +190,7 @@ const Settings = () => {
                     {loading ? (
                         <LoadingDots />
                     ) : data ? (
-                        <ShowSlots data={data} appointmentBy={appointmentBy}  date={date}/>
+                        <ShowSlots data={data} appointmentBy={appointmentBy}  date={date} getScheduleData={handleApiCalling}/>
                     ) : (
                         <AddSlots
                             date={date}

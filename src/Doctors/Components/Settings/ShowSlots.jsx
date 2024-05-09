@@ -5,17 +5,38 @@ import SettingsContext from "../../../Utils/Context/Doctor/SettingsContext";
 import { useSelector } from "react-redux";
 import EditSlots from "./EditSlots";
 
-const ShowSlots = ({ data, date }) => {
+const ShowSlots = ({ data, date, getScheduleData }) => {
     const { doctor } = useSelector((state) => state.doctorsData);
     const { appointmentBy } = useContext(SettingsContext);
     const [editSlot, setEditSlot] = useState();
 
-    if (editSlot) return <EditSlots data={data} date={date} />;
+    if (editSlot) return <EditSlots data={data} date={date} getScheduleData={getScheduleData}/>;
     if (data?.isholiday)
         return (
-            <h4 className="capitalize text-center font-f3 font-w3 text-c1 text-[13px] md:text-[15px]">
-                As Per Your Schedule This is your holiday !
-            </h4>
+            <>
+                <h4 className="capitalize text-center font-f3 font-w3 text-c1 text-[13px] md:text-[15px]">
+                    As Per Your Schedule This is your holiday !
+                </h4>
+                <PrimaryButton
+                    content={"Edit"}
+                    disabled={
+                        doctor?.acceptAppointments == "byToken" &&
+                        appointmentBy != "token"
+                            ? true
+                            : doctor?.acceptAppointments == "bySlot" &&
+                                appointmentBy != "slot"
+                              ? true
+                              : false
+                    }
+                    onclick={() => setEditSlot(true)}
+                    className={`bg-c1 text-c2 font-f2 w-full mt-auto`}
+                    h={"37px"}
+                    bg={"c1"}
+                    color={"#353535"}
+                    radius={"44px"}
+                    // disabled={!signInInfo.password}
+                />
+            </>
         );
     return (
         <>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Avatar from "../../Common/Components/Avatar/Avatar";
 import { useNavigate, useParams } from "react-router-dom";
 import { axiosClient } from "../../Utils/axiosClient";
@@ -8,6 +8,12 @@ import StepperForMissedAppointments from "../Components/Appointments/Missed/Step
 import PrimaryButton from "../../Common/Components/Buttons/PrimaryButton";
 import AppointCancelDialog from "../Components/Appointment/AppointCancelDialog";
 import AppointmentCancelledPopUp from "../Components/Appointment/AppointmentCancelledPopUp";
+import {
+    ACCEPT_APPOINTMENT,
+    SELECTED_HOSPITAL,
+    setSessionItem,
+} from "../../Utils/SessionStorage/appointmentForm";
+import toast from "react-hot-toast";
 
 const CancelledAppointmentDetails = () => {
     const { appointmentId } = useParams();
@@ -20,11 +26,11 @@ const CancelledAppointmentDetails = () => {
 
     const getPendingAppointmentsData = async () => {
         try {
+            setLoading(true);
             const response = await axiosClient.get(
                 `/v2/getsingleappointmentbyid/${appointmentId}/missed`
             );
             if (response.status === "ok") {
-                console.log(response.result);
                 // setTempDate(response.result.appointmentDate);
                 // setTempDate(
                 //     moment(response.result.appointmentDate).format("YYYY-MM-DD")
@@ -33,7 +39,10 @@ const CancelledAppointmentDetails = () => {
                 return setAppointment(response.result);
             }
         } catch (error) {
+            toast.error(error.message);
             console.log(error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -58,6 +67,19 @@ const CancelledAppointmentDetails = () => {
         }
         // setUpdatedStatus("cancled");
     };
+
+    console.log(appointment?.doctorid?._id);
+
+    const handleBookAgain = useCallback(() => {
+        setSessionItem(SELECTED_HOSPITAL, appointment?.doctorid?._id);
+        setSessionItem(
+            ACCEPT_APPOINTMENT,
+            appointment?.doctorid?.acceptAppointments
+        );
+        navigate(
+            `/patient/doctor/${appointment?.doctorid?._id}/book_appointment`
+        );
+    }, [appointment]);
 
     useEffect(() => {
         getPendingAppointmentsData();
@@ -157,11 +179,8 @@ const CancelledAppointmentDetails = () => {
                     </div>
                 </div>
                 <PrimaryButton
-                    onclick={() =>
-                        navigate(
-                            `/patient/doctor/${appointment?.doctorid?._id}/book_appointment`
-                        )
-                    }
+                    disabled={loading}
+                    onclick={handleBookAgain}
                     className={`bg-c1 text-c2 font-f2 font-w1 w-fit px-[53px] mx-auto block whitespace-nowrap my-5`}
                     // w={"132px"}
                     h={"40px"}
