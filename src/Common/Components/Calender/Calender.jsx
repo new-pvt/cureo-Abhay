@@ -9,12 +9,15 @@ const Calender = ({
     name,
     initialDate = moment().format("DD-MM-YYYY"),
 }) => {
-  
     const clickAwayToClose = () => (onclose ? onclose() : null);
     const ref = useClickAwayToClose(clickAwayToClose);
 
     const [date, setDate] = useState(
-        initialDate == "" ? moment() : initialDate == "Today" ? moment() : moment(initialDate, "DD-MM-YYYY")
+        initialDate == ""
+            ? moment()
+            : initialDate == "Today"
+              ? moment()
+              : moment(initialDate, "DD-MM-YYYY")
     );
     const currentMonth = date.month();
     const currentYear = date.year();
@@ -127,7 +130,6 @@ const Calender = ({
                                 key={year}
                                 ref={currentYear == year ? yearsRef : null}
                                 className={`cursor-pointer p-3 font-f2 font-w2 text-[15px] rounded-full`}
-                                // onClick={() => handleDateClick(date)}
                             >
                                 <span
                                     className={`text-center block  py-2 rounded-full ${currentYear == year ? "bg-c3 text-c2" : "text-[#8A8989]"}`}
@@ -189,50 +191,23 @@ const Calender = ({
                                     );
                                 }}
                                 key={item}
-                                // ref={isCurrentYear ? yearsRef : null}
                                 className={`cursor-pointer p-3 w-full font-f2 font-w2 text-[13px] ${isCurrentDate(item) && selectedDate(item) ? "bg-c3 text-c2" : isCurrentDate(item) ? "border text-c3" : selectedDate(item) ? "bg-c3 text-c2" : isSunday(item) ? "text-c24" : isSatureday(item) ? "text-c24" : "text-[#8A8989]"} rounded-[50%] `}
-                                // onClick={() => handleDateClick(date)}
                             >
                                 <span className={`text-center block `}>
                                     {item}
                                 </span>
                             </div>
                         ))}
-                        {/* {Array.from({ length: date.daysInMonth() }).map(
-                            (_, i) => {
-                                return (
-                                    <div
-                                        key={i}
-                                        className={` w-full text-center font-f2 font-w1 ${i === 0 ? "text-[#FF271B]" : "text-[#8A8989]"} aspect-square flex justify-center items-center`}
-                                    >
-                                        {i + 1}
-                                    </div>
-                                );
-                            }
-                        )} */}
                     </div>
                 )}
-                {/* {week.map((day, i) => (
-                        <div
-                            key={i}
-                            className={` w-full text-center font-f2 font-w1 ${i === 0 ? "text-[#FF271B]" : "text-[#8A8989]"} aspect-square flex justify-center items-center`}
-                        >
-                            {day}
-                        </div>
-                    ))}
-                    {Array.from({ length: date.daysInMonth() }).map((_, i) => {
-                        return (
-                            <div
-                                key={i}
-                                className={` w-full text-center font-f2 font-w1 ${i === 0 ? "text-[#FF271B]" : "text-[#8A8989]"} aspect-square flex justify-center items-center`}
-                            >
-                                {i + 1}
-                            </div>
-                        );
-                    })} */}
-                {/* </div> */}
+
                 <div className="absolute bottom-0 right-0 flex gap-6 p-4 font-f3 text-md text-c3 font-[500]">
-                    <button onClick={()=>onclose()} className="text-[#8A8989]">CANCEL</button>
+                    <button
+                        onClick={() => onclose()}
+                        className="text-[#8A8989]"
+                    >
+                        CANCEL
+                    </button>
                     <button
                         name={name}
                         onClick={(e) => callback(e, date.format("DD-MM-YYYY"))}
