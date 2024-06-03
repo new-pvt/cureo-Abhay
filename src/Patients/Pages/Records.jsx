@@ -58,7 +58,7 @@ const Records = () => {
                 <main className="overflow-x-hidden md:mt-0 relative px-[16px] md:px-[50px] pt-[33px] md:pt-[74px] w-full min-h-[calc(100vh-93px)] flex flex-wrap gap-2.5 ">
                     <div
                         onClick={() => setUploadRecord(true)}
-                        className="flex-1 md:flex-grow-0 aspect-square h-[165px] md:h-[250px] bg-c3 flex flex-col justify-center items-center gap-2.5 rounded-[5px] cursor-pointer"
+                        className=" md:flex-grow-0 aspect-square h-[165px] md:h-[250px] bg-c3 flex flex-col justify-center items-center gap-2.5 rounded-[5px] cursor-pointer"
                     >
                         <img src="/Records/upload records.png" alt="" />
                         <span className="text-c2 font-f2 font-w1">
@@ -69,7 +69,7 @@ const Records = () => {
                         <div
                             key={i}
                             onClick={() => handleShowRecord(i)}
-                            className={`flex-1 md:flex-grow-0 aspect-square h-[165px] md:h-[250px] border border-[#D9D9D982] rounded-[5px]`}
+                            className={`md:flex-grow-0 aspect-square h-[165px] md:h-[250px] border border-[#D9D9D982] rounded-[5px]`}
                         >
                             <div className="w-[100%] h-[70%] overflow-hidden no-scrollbar">
                                 {record?.imgtype == "application/pdf" ? (
