@@ -1,5 +1,5 @@
-import React, { memo, useEffect, useRef, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import React, { memo, useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import PrimaryButton from "../Components/Buttons/PrimaryButton";
 import { LinkText, P5, TextButton } from "../Components/Text/Textt";
 import { useSelector } from "react-redux";
@@ -14,7 +14,7 @@ const MobileNav = ({
     handleAuthClick,
 }) => {
     const { pathname } = useLocation();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const { user, isLoggedIn } = useSelector((state) => state.auth);
     const [authCard, setAuthCard] = useState(false);
 
@@ -30,7 +30,7 @@ const MobileNav = ({
     }, []);
 
     return (
-        <div className="fixed flex md:hidden justify-center items-end h-[100dvh] inset-0 z-40 bg-c21 px-4">
+        <div className="fixed flex md:hidden justify-center items-end h-dvh inset-0 z-40 bg-c21 px-4">
             <div
                 ref={ref}
                 className="flex flex-col items-center relative my-4 py-4 bg-c2 w-full rounded-[13px]"
@@ -43,7 +43,10 @@ const MobileNav = ({
                                     ? user?.imgurl
                                     : "/Navbar/human.png"
                             }
-                            onclick={()=>{navigate('/patient/edit-profile'); setMenu(false)}}
+                            onclick={() => {
+                                navigate("/patient/edit-profile");
+                                setMenu(false);
+                            }}
                             avatar="Edit"
                             className={"w-[56px] h-[56px] mx-auto"}
                         />

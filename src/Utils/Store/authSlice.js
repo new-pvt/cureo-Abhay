@@ -23,7 +23,7 @@ const authSlice = createSlice({
         updateUserData: (state, action) => {
             state.user = action.payload;
         },
-        logout: (state, action) => {
+        logout: (state) => {
             state.isLoggedIn = false;
             state.needToAuthenticate = true;
             state.user = null;
@@ -48,7 +48,7 @@ const authSlice = createSlice({
                 authType: action.payload
             }
         },
-        resetState: (state, action) => {
+        resetState: (state) => {
             state.getAuthenticate = {
                 role: null,
                 authType: null
