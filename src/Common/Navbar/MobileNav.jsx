@@ -1,4 +1,5 @@
 import React, { memo, useEffect, useState } from "react";
+import ReactDOM from "react-dom";
 import { useLocation, useNavigate } from "react-router-dom";
 import PrimaryButton from "../Components/Buttons/PrimaryButton";
 import { LinkText, P5, TextButton } from "../Components/Text/Textt";
@@ -29,7 +30,7 @@ const MobileNav = ({
         };
     }, []);
 
-    return (
+    return ReactDOM.createPortal(
         <div className="fixed flex md:hidden justify-center items-end h-dvh inset-0 z-40 bg-c21 px-4">
             <div
                 ref={ref}
@@ -138,7 +139,8 @@ const MobileNav = ({
                     </>
                 )}
             </div>
-        </div>
+        </div>,
+        document.querySelector(".myportalModelDiv")
     );
 };
 
