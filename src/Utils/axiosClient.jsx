@@ -13,9 +13,13 @@ import {
 } from "./Store/authSlice";
 
 export const axiosClient = axios.create({
-    baseURL: "https://cureo-backend.onrender.com",
+    baseURL: "http://cureobackend2.ap-south-1.elasticbeanstalk.com",
     // withCredentials: true
 });
+// export const axiosClient = axios.create({
+//     baseURL: "https://cureo-backend.onrender.com",
+//     // withCredentials: true
+// });
 // export const axiosClient = axios.create({
 //     baseURL: "http://localhost:5001",
 //     // withCredentials: true
