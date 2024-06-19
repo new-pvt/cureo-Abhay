@@ -1,10 +1,7 @@
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { KEY_ACCESS_TOKEN, getItem, removeItem } from "./localStorageManager";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import useGetAuthenticate from "./Hooks/useGetAuthenticate";
-import PatientLogIn from "../Patients/Components/Authentication/PatientLogIn";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
     doctorAuth,
     hospitalAuth,
@@ -13,7 +10,7 @@ import {
 } from "./Store/authSlice";
 
 export const axiosClient = axios.create({
-    baseURL: "http://cureobackend2.ap-south-1.elasticbeanstalk.com",
+    baseURL: "https://medidek.shop",
     // withCredentials: true
 });
 // export const axiosClient = axios.create({
@@ -22,6 +19,10 @@ export const axiosClient = axios.create({
 // });
 // export const axiosClient = axios.create({
 //     baseURL: "http://localhost:5001",
+//     // withCredentials: true
+// });
+// export const axiosClient = axios.create({
+//     baseURL: "http://15.206.100.232",
 //     // withCredentials: true
 // });
 
@@ -44,7 +45,7 @@ const AxiosInterceptor = ({ children }) => {
                 if (data.status === "ok") {
                     return data;
                 }
-                const originalRequest = respon.config;
+                // const originalRequest = respon.config;
                 const statusCode = data.statusCode;
 
                 if (
@@ -65,7 +66,7 @@ const AxiosInterceptor = ({ children }) => {
                             dispatch(doctorAuth("signIn"));
                             break;
 
-                        case window.location.pathname.startsWith("/patient"):
+                        case window.location.pathname.startsWith("/hospital"):
                             dispatch(hospitalAuth("signIn"));
                             break;
                     }
