@@ -41,7 +41,7 @@ const SortFilter = ({
     }, []);
 
     return (
-        <div className="fixed flex md:hidden justify-center items-end h-screen inset-0 z-40 bg-c21 px-4">
+        <div className="fixed flex md:hidden justify-center items-end h-dvh inset-0 z-40 bg-c21 px-4">
             <div
                 ref={ref}
                 className="flex flex-col relative my-4 p-4 bg-c2 w-full rounded-[13px]"

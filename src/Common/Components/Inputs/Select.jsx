@@ -15,7 +15,7 @@ const Select = ({
     options,
     setSelect,
     disabled,
-    readOnly
+    readOnly,
 }) => {
     const [showDropdown, setShowDropdown] = useState(false);
     const ref = useClickAwayToClose(() => setShowDropdown(false));
@@ -26,9 +26,10 @@ const Select = ({
             className={`relative h-[41px] border border-c17 text-[13px] ${divClasses} `}
         >
             <input
-            autoComplete="off"
-            readOnly={readOnly}
-                onFocus={() => readOnly ? null : setShowDropdown(true)}
+                autoComplete="off"
+                inputMode="none"
+                readOnly={readOnly}
+                onFocus={() => (readOnly ? null : setShowDropdown(true))}
                 disabled={disabled}
                 required={required}
                 id={id}

@@ -61,7 +61,7 @@ const Table = ({ data, appointmentBy }) => {
         <div
             className={` ${pathname == "/doctor/dashboard" ? "h-[calc(100vh-294px)]" : "h-[calc(100vh-243px)]"}  w-full overflow-auto md:no-scrollbar mt-[29px]`}
         >
-            <table className=" relative w-full text-center">
+            <table className=" relative w-full text-left md:text-center">
                 <thead className="sticky z-10 top-0 bg-c2 text-center">
                     <tr className="whitespace-nowrap">
                         {tableHeading.map((heading, i) => (

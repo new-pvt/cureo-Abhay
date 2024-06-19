@@ -25,13 +25,15 @@ const DatePicker = ({
     return (
         <div className={`relative ${divClasses}`}>
             <input
+                inputMode="none"
                 onChange={() => null}
                 onFocus={() => setShowCalender(true)}
                 value={value}
                 type="text"
                 id={id}
+                style={{caret:"transparent"}}
                 placeholder={placeholder}
-                className={inputClasses}
+                className={`caret-transparent ${inputClasses}`}
                 required={required}
             />
             {icon && (

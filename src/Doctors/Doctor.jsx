@@ -52,7 +52,7 @@ const Doctor = () => {
                     )}
 
                     <main
-                        className={`w-full ${hideAside ? "md:w-full p-0" : "md:w-[81.60%]  p-5"} bg-[#108ED624] min-h-[calc(100vh-60px)]  rounded-[9px]`}
+                        className={`w-full ${hideAside ? "md:w-full p-0" : "md:w-[81.60%]  p-5"} bg-[#108ED624] min-h-[calc(100dvh-60px)]  rounded-[9px]`}
                     >
                         <Routes>
                             <Route element={<RequireVerified />}>

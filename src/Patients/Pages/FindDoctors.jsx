@@ -91,7 +91,6 @@ const FindDoctors = () => {
                 `/v2/getusergetalldoctors?locationOrNameOfTheDoctor=${location + " " + speciality}`
             );
             if (response.status === "ok") {
-                setIsLoading(false);
                 setDoctorsData(response.result);
             }
         } catch (error) {
@@ -111,6 +110,11 @@ const FindDoctors = () => {
     };
 
     useEffect(() => {
+        if (!location && !speciality) {
+            getDoctorsList();
+            getSpeacilityList();
+            return;
+        }
         const request = setTimeout(() => {
             getDoctorsList();
         }, 800);
@@ -118,10 +122,9 @@ const FindDoctors = () => {
         return () => clearTimeout(request);
     }, [location, speciality]);
 
-    useEffect(() => {
-        getSpeacilityList();
-    }, []);
-
+    // useEffect(() => {
+    //     getSpeacilityList();
+    // }, []);
 
     // if (doctorsData[0] == "No Doctors Found") {
     //     return (
@@ -157,7 +160,7 @@ const FindDoctors = () => {
                     placeholder="Enter location"
                     name="locationOrNameOfTheDoctor"
                     icon={locationIcon}
-                    options={data?.map((item, i) => item.description)}
+                    options={data?.map((item) => item.description)}
                     divClasses="w-[80%] md:w-[19.27%] rounded-[106px]"
                     inputClasses="rounded-[106px] text-[13px]"
                     value={location}
@@ -178,14 +181,26 @@ const FindDoctors = () => {
                     inputClasses="rounded-[106px] text-[13px]"
                 />
             </div>
-            {doctorsData?.length > 0 &&
+            {isloading ? (
+                <div className="w-[150px] my-6 md:mt-[50px] md:mb-[22px] h-4 md:h-5 bg-[#B8B8BA99] rounded"></div>
+            ) : (
+                doctorsData?.length > 0 &&
                 doctorsData[0] != "No Doctors Found" && (
                     <H7
                         content={`${doctorsData?.length} doctors near you`}
                         className="my-6 md:mt-[50px] md:mb-[22px]"
                     />
-                )}
-            {doctorsData[0] == "No Doctors Found" ? (
+                )
+            )}
+
+            {isloading ? (
+                Array.from({ length: 10 }).map((_, i) => (
+                    <SkeletonForDoctorsCard key={i} 
+                    className={`${ i == 0 ? "border-y " : "border-b" } border-dashed border-[#B8B8BA99] `}
+                    
+                    />
+                ))
+            ) : doctorsData[0] == "No Doctors Found" ? (
                 <div className="relative">
                     <div className="md:w-[55%] h-1/3 blur-[120px] absolute bottom-0 right-0 left-0 mx-auto -z-10 bg-gradient-to-b from-[#1F51C6AD] via-[#108ED6] to-[#1F51C6]"></div>
                     <Illistration
@@ -203,15 +218,16 @@ const FindDoctors = () => {
                     />
                 </div>
             ) : (
-                doctorsData?.map((doctorInfo) => (
+                doctorsData?.map((doctorInfo, i) => (
                     // <Link key={doctorInfo?._id} to={`/doctor-details/${doctorInfo?._id}`} >
+                    // <SkeletonForDoctorsCard/>
                     <DoctorCard
                         key={doctorInfo?._id}
                         doctorInfo={doctorInfo}
                         visible={true}
                         clickble={true}
                         discreption={false}
-                        className="border-y border-dashed border-[#B8B8BA99] "
+                        className={`${ i == 0 ? "border-y " : "border-b" } border-dashed border-[#B8B8BA99] `}
                     />
                     // </Link>
                 ))

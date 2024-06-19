@@ -91,7 +91,7 @@ const DoctorCard = ({
                 <PrimaryButton
                     className={"bg-c1 font-f2 w-full md:w-[145px]"}
                     w={"145px"}
-                    h={"45px"}
+                    h={"40px"}
                     bg={"c1"}
                     color={"white"}
                     radius={"44px"}
