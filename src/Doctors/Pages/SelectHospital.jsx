@@ -37,7 +37,7 @@ const SelectHospital = () => {
         navigate("/doctor/dashboard");
     };
     return (
-        <main className="relative w-full px-4 h-screen flex justify-center items-center ">
+        <main className="relative w-full px-4 h-dvh flex justify-center items-center ">
             <div className="md:w-[40%] h-[50%] blur-[120px] fixed bottom-0 right-0 -z-20 bg-gradient-to-l from-[#1F51C626] via-[#108ED638] to-[#1F51C638]"></div>
 
             <div className="md:w-[40%] h-[50%] blur-[120px] fixed left-0 bottom-0 -z-20 bg-gradient-to-b from-[#1F51C638] via-[#108ED638] to-[#1F51C626]"></div>

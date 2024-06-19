@@ -61,7 +61,7 @@ const Table = ({ data, appointmentBy }) => {
         <div
             className={` ${pathname == "/doctor/dashboard" ? "h-[calc(100vh-294px)]" : "h-[calc(100vh-243px)]"}  w-full overflow-auto md:no-scrollbar mt-[29px]`}
         >
-            <table className=" relative w-full text-left md:text-center">
+            <table className=" relative w-full text-center">
                 <thead className="sticky z-10 top-0 bg-c2 text-center">
                     <tr className="whitespace-nowrap">
                         {tableHeading.map((heading, i) => (
@@ -79,7 +79,7 @@ const Table = ({ data, appointmentBy }) => {
                         <tr>
                             <td
                                 colSpan={7}
-                                className="p-2 font-f3 font-w1 text-c16 text-[13px] "
+                                className="p-2 font-f3 font-w1 text-c16 text-[13px] text-left md:text-center pl-10 md:pl-0"
                             >
                                 Loading...
                             </td>
@@ -88,7 +88,7 @@ const Table = ({ data, appointmentBy }) => {
                         <tr>
                             <td
                                 colSpan={7}
-                                className="p-2 font-f3 font-w1 text-c16 text-[13px]"
+                                className="p-2 font-f3 font-w1 text-c16 text-[13px] text-left md:text-center pl-10 md:pl-0"
                             >
                                 An Error Occured {data?.error?.message}
                             </td>
@@ -97,7 +97,7 @@ const Table = ({ data, appointmentBy }) => {
                         <tr>
                             <td
                                 colSpan={7}
-                                className="p-2 font-f3 font-w1 text-c16 text-[13px]"
+                                className="p-2 font-f3 font-w1 text-c16 text-[13px] text-left md:text-center pl-10 md:pl-0"
                             >
                                 No Appointments
                             </td>
