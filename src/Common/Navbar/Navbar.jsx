@@ -118,7 +118,7 @@ const Navbar = () => {
                     onClick={() => navigate("/")}
                     src="/cureO.png"
                     alt="logo"
-                    className=" md:w-[40px] h-[60px]"
+                    className="w-[40px] h-[45px] md:w-[50px] md:h-[60px]"
                 />
                 <nav className="hidden md:flex items-center gap-[34px] bg-[#1F51C61F] px-[22px] py-[4px] rounded-[93px] ">
                     {ulList.map((list, i) => (

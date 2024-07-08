@@ -64,7 +64,7 @@ const Footer = () => {
                 <img
                     src="/jpg.jpg"
                     alt="img"
-                    className=" w-20 rounded-xl"
+                    className=" w-20 h-20 rounded-xl"
                 />
                 <div className="text-white block md:hidden">
                     <div className="flex gap-2.5 mt-2">
