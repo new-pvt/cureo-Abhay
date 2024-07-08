@@ -4,7 +4,7 @@ const Privacy = () => {
 
     useEffect(() => {
         // Check if the current route is the privacy policy route
-        if (location.pathname === "/medidek/cancellation-policy") {
+        if (location.pathname === "/CureO/cancellation-policy") {
             // Scroll to the privacy policy div
             const privacyPolicyDiv =
                 document.getElementById("privacyPolicy");
@@ -18,12 +18,12 @@ const Privacy = () => {
         <div className="p-4">
             <h1 className="text-center py-5 text-3xl font-f1 font-w3 text-c2  bg-c1">Privacy Policy</h1>
             <p className="font-f2 font-w1 md:text-[1rem]  text-c12 leading-[24px] md:px-[22px]">
-                Medidek is owned and managed by Medidek Healthcare pvt ltd
-                (herein after referred to as Medidek If you continue to browse
+                CureO is owned and managed by CureO Healthcare pvt ltd
+                (herein after referred to as CureO If you continue to browse
                 and use this website you are agreeing to comply with and be
                 bound by the following terms and conditions of use, which
-                together with our privacy policy govern Medidek relationship
-                with you in relation to this website. The term Medidek or 'us'
+                together with our privacy policy govern CureO relationship
+                with you in relation to this website. The term CureO or 'us'
                 or 'we' refers to the owner of the website whose registered
                 office is in Nagpur, Maharashtra. Our company registration
                 number is U74909MH2023PTC405996 India. The term 'you' refers to
@@ -67,7 +67,7 @@ const Privacy = () => {
                     is prohibited other than in accordance with the copyright
                     notice, which forms part of these terms and conditions. All
                     trademarks reproduced in this website which are not the
-                    property of, or licensed to Medidek are acknowledged on the
+                    property of, or licensed to CureO are acknowledged on the
                     website.{" "}
                 </li>
                 <li
@@ -84,7 +84,7 @@ const Privacy = () => {
                 </li>
                 <li className="font-f2 font-w1 md:text-[1rem]  text-c12 leading-[24px] md:px-[22px]">
                     You may not create a link to this website from another
-                    website or document without Medidek prior written consent.
+                    website or document without CureO prior written consent.
                     Your use of this website and any dispute arising out of such
                     use of the website is subject to the laws of India or
                     regulatory authority within the country of India.{" "}
@@ -98,7 +98,7 @@ const Privacy = () => {
                 Cancellation Policy
             </h5>
             <p className="font-f2 font-w1 md:text-[1rem]  text-c12 leading-[24px] md:px-[22px]">
-                Medidek believes in helping its customers as far as possible,
+                CureO believes in helping its customers as far as possible,
                 and has therefore a liberal cancellation policy. Under this
                 policy:
             </p>
@@ -123,7 +123,7 @@ const Privacy = () => {
                 </li>
                 <li className="font-f2 font-w1 md:text-[1rem]  text-c12 leading-[24px] md:px-[22px]">
                     No cancellations are entertained for those products/services
-                    that the Medidek marketing team has obtained on special
+                    that the CureO marketing team has obtained on special
                     discounts and offers on occasions like New Year, Pongal,
                     Diwali, Independence Day, Foundation Day etc.
                 </li>
@@ -147,7 +147,7 @@ const Privacy = () => {
                 a full refund, subject to deductions for legal documents or
                 services provided. To request a refund under this guarantee, you
                 must contact us within the first 24 hours of your payment. Just
-                send an email to Medidek . We'll gladly refund you 100% of your
+                send an email to CureO . We'll gladly refund you 100% of your
                 fees within 24-72 hours of your refund request.
             </p>
             <h5
@@ -158,19 +158,19 @@ const Privacy = () => {
                 Privacy Policy
             </h5>
             <p className="font-f2 font-w1 md:text-[1rem]  text-c12 leading-[24px] md:px-[22px]">
-                This privacy policy sets out how Medidek uses and protects any
-                information that you provide to Medidek when you use this
+                This privacy policy sets out how CureO uses and protects any
+                information that you provide to CureO when you use this
                 website.
             </p>
             <p className="font-f2 font-w1 md:text-[1rem]  text-c12 leading-[24px] md:px-[22px]">
-                Medidek is committed to ensuring that your privacy is protected.
+                CureO is committed to ensuring that your privacy is protected.
                 Should we ask you to provide certain information by which you
                 can be identified when using this website, then you can be
                 assured that it will only be used in accordance with this
                 privacy statement.
             </p>
             <p className="font-f2 font-w1 md:text-[1rem]  text-c12 leading-[24px] md:px-[22px]">
-                Medidek may change this policy from time to time by updating
+                CureO may change this policy from time to time by updating
                 this page. You should check this page from time to time to
                 ensure that you are happy with any changes. This policy is
                 revised and effective from 01/01/2016.
@@ -306,7 +306,7 @@ const Privacy = () => {
                     if you have previously agreed to us using your personal
                     information for promotional purposes, you may change your
                     mind at any time by writing to or emailing us at
-                    contact@medidek.in
+                    contact@CureO.in
                 </li>
             </ul>
             <p className="font-f2 font-w1 md:text-[1rem]  text-c12 leading-[24px] md:px-[22px]">
@@ -325,11 +325,11 @@ const Privacy = () => {
             </h5>
             <p className="font-f2 font-w1 md:text-[1rem]  text-c12 leading-[24px] md:px-[22px]">
                 If there are any questions regarding this privacy policy you may
-                contact us using the information below: Medidek Healthcare pvt
+                contact us using the information below: CureO Healthcare pvt
                 ltd
             </p>
             <p className="font-f2 font-w1 md:text-[1rem]  text-c12 leading-[24px] md:px-[22px]">
-                contact@medidek.in
+                contact@CureO.in
             </p>
             <p className="font-f2 font-w1 md:text-[1rem]  text-c12 leading-[24px] md:px-[22px]">
                 Tel.: +91 8087036733

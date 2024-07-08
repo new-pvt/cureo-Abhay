@@ -17,13 +17,13 @@ const Section3 = () => {
             number: "02",
             title: "Appointment Tracking:",
             description:
-                "Say goodbye to long waiting times and phone calls. With Medidek, you can effortlessly book appointments with your healthcare providers at your convenience.",
+                "Say goodbye to long waiting times and phone calls. With CureO, you can effortlessly book appointments with your healthcare providers at your convenience.",
         },
         {
             number: "03",
             title: "Medical History Management:",
             description:
-                "Your health history is important, and we prioritize its security. Medidek allows you to upload and manage your medical history securely, ensuring that you have access to crucial information when needed.",
+                "Your health history is important, and we prioritize its security. CureO allows you to upload and manage your medical history securely, ensuring that you have access to crucial information when needed.",
         },
     ];
     return (
@@ -40,7 +40,7 @@ const Section3 = () => {
                 />
                 <P1
                     content={
-                        "Medidek is designed to put your health in your hands. We believe that managing your healthcare should be simple, secure, and personalized. "
+                        "CureO is designed to put your health in your hands. We believe that managing your healthcare should be simple, secure, and personalized. "
                     }
                     className="text-center md:text-left"
                 />

@@ -84,13 +84,13 @@ const Patient = () => {
                         <Route path="/contact-us" element={<ContactUs />} />
                         <Route path="/our-team" element={<OurTeam />} />
                         <Route path="/blogs" element={<Blogs />} />
-                        <Route path="/medidek/privacy" element={<Privacy />} />
+                        <Route path="/cureO/privacy" element={<Privacy />} />
                         <Route
-                            path="/medidek/termsAndCondition"
+                            path="/cureO/termsAndCondition"
                             element={<TermsAndCondition />}
                         />
                         <Route
-                            path="/medidek/cancellation-policy"
+                            path="/cureO/cancellation-policy"
                             element={<CancellationPolicy />}
                         />
                         <Route

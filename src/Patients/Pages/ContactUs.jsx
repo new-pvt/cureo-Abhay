@@ -116,7 +116,7 @@ const ContactUs = () => {
                         </div>
                         <div className="">
                             <P3
-                                content="Medidek Healthcare Pvt Ltd."
+                                content="CureO Healthcare Pvt Ltd."
                                 className="text-[15px]"
                             />
                             <Span

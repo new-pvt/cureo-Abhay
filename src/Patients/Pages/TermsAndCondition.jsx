@@ -6,7 +6,7 @@ const TermsAndCondition = () => {
             <h1 className="text-center py-5 text-3xl font-f1 font-w3 text-c2  bg-c1">Terms & Conditions</h1>
 
             <p className="font-f2 font-w1 md:text-[1rem]  text-c12 leading-[24px] md:px-[22px]">
-                This website is owned and managed by Medidek healthcare pvt ltd.
+                This website is owned and managed by CureO healthcare pvt ltd.
                 By accessing and using the{" "}
                 <a
                     className={
@@ -22,7 +22,7 @@ const TermsAndCondition = () => {
                 anyone who accesses the Web Site.
             </p>
             <p className="font-f2 font-w1 md:text-[1rem]  text-c12 leading-[24px] md:px-[22px]">
-                As you browse through the website and Medidek healthcare pvt ltd
+                As you browse through the website and CureO healthcare pvt ltd
                 sites you may access other web sites that are subject to
                 different terms of use. When you use those sites, you will be
                 legally bound by the specific terms of use posted on such sites.
@@ -31,7 +31,7 @@ const TermsAndCondition = () => {
                 govern with respect to use of such pages.
             </p>
             <p className="font-f2 font-w1 md:text-[1rem]  text-c12 leading-[24px] md:px-[22px]">
-                Medidek healthcare pvt ltd may change these Terms & Conditions
+                CureO healthcare pvt ltd may change these Terms & Conditions
                 at any time without notice. Changes will be posted on the
                 website under "Terms & Conditions". Your use of the Web Site
                 after any changes have been posted will constitute your
@@ -47,7 +47,7 @@ const TermsAndCondition = () => {
                 1. USE OF THE WEB SITE
             </h5>
             <p className="font-f2 font-w1 md:text-[1rem]  text-c12 leading-[24px] md:px-[22px]">
-                Medidek healthcare pvt ltd hereby grants you a non-exclusive,
+                CureO healthcare pvt ltd hereby grants you a non-exclusive,
                 non-transferable, limited license to access and use the Web Site
                 for the fees, if applicable, and under the terms set forth
                 below.
@@ -63,10 +63,10 @@ const TermsAndCondition = () => {
                 part, from the Web Site or to display, perform, publish,
                 distribute, transmit, broadcast or circulate any Content to
                 anyone, or for any commercial purpose, without the express prior
-                written consent of Medidek healthcare pvt ltd
+                written consent of CureO healthcare pvt ltd
             </p>
             <p className="font-f2 font-w1 md:text-[1rem]  text-c12 leading-[24px] md:px-[22px]">
-                The Content is the exclusive property of Medidek healthcare pvt
+                The Content is the exclusive property of CureO healthcare pvt
                 ltd or its licensors, and is protected by copyright and other
                 intellectual property laws. All trade names, trademarks, service
                 marks and other product and service names and logos on the Web
@@ -74,17 +74,17 @@ const TermsAndCondition = () => {
                 owners and are protected by applicable trademark and copyright
                 laws. Any of the trademarks, service marks or logos
                 (collectively, the "Marks") displayed on the Web Site may be
-                registered or unregistered marks of Medidek healthcare pvt ltd
+                registered or unregistered marks of CureO healthcare pvt ltd
                 or others. Nothing contained on this Web Site should be
                 construed as granting any license or right to use any of the
                 Marks displayed on the Web Site without the express written
-                permission of Medidek healthcare pvt ltd or a third party owner
+                permission of CureO healthcare pvt ltd or a third party owner
                 of such Marks. Any unauthorized uses of the Marks or any other
                 Content are strictly prohibited. To request permission to use
-                any Content or other Medidek healthcare pvt ltd material, please
-                contact Medidek healthcare pvt ltd at contact@medidek.in You may
+                any Content or other CureO healthcare pvt ltd material, please
+                contact CureO healthcare pvt ltd at contact@CureO.in You may
                 not use the Web Site for any unlawful purpose. You shall honor
-                all reasonable requests by the website to protect Medidek
+                all reasonable requests by the website to protect CureO
                 healthcare pvt ltd proprietary interests in the website.
             </p>
             <h5
@@ -123,7 +123,7 @@ const TermsAndCondition = () => {
                 and the potential hazards of electronic distribution, there may
                 be delays, omissions or inaccuracies in such Content and the Web
                 Site. THE CONTENT AND THE WEB SITE ARE PROVIDED "AS IS", WITHOUT
-                ANY WARRANTIES. NEITHER THE WEBSITE NOR Medidek healthcare pvt
+                ANY WARRANTIES. NEITHER THE WEBSITE NOR CureO healthcare pvt
                 ltd MAKES ANY GUARANTEES OR WARRANTIES AS TO THE ACCURACY,
                 COMPLETENESS, TIMELINESS OR CURRENTNESS OF OR RESULTS TO BE
                 OBTAINED FROM, ACCESSING AND USING THE WEB SITE, THE WEB SITE'S
@@ -132,11 +132,11 @@ const TermsAndCondition = () => {
                 THROUGH THE WEB SITE. THE WEBSITE HEREBY DISCLAIMS ANY AND ALL
                 WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF
                 MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE OR USE AND
-                OF NONINFRINGEMENT. NEITHER THE WEBSITE NOR Medidek healthcare
+                OF NONINFRINGEMENT. NEITHER THE WEBSITE NOR CureO healthcare
                 pvt ltd SHALL BE LIABLE TO THE USER OR ANYONE ELSE FOR ANY
                 INACCURACY, DELAY, INTERRUPTION IN SERVICE, ERROR OR OMISSION,
                 REGARDLESS OF CAUSE, OR FOR ANY DAMAGES RESULTING THEREFROM. IN
-                NO EVENT WILL THE WEBSITE, Medidek healthcare pvt ltd NOR ANY OF
+                NO EVENT WILL THE WEBSITE, CureO healthcare pvt ltd NOR ANY OF
                 THEIR THIRD PARTY LICENSORS BE LIABLE FOR ANY DIRECT, INDIRECT,
                 SPECIAL OR CONSEQUENTIAL DAMAGES, INCLUDING BUT NOT LIMITED TO,
                 LOST TIME, LOST MONEY, LOST PROFITS OR GOOD WILL, WHETHER IN
@@ -189,15 +189,15 @@ const TermsAndCondition = () => {
                 4.THE USER'S CONTENT
             </h5>
             <p className="font-f2 font-w1 md:text-[1rem]  text-c12 leading-[24px] md:px-[22px]">
-                The User grants to Medidek healthcare pvt ltd the non-exclusive
+                The User grants to CureO healthcare pvt ltd the non-exclusive
                 right to use all material entered into the Web site by the User
                 (other than third-party material transmitted through private
-                electronic mail) in any of The Medidek healthcare pvt ltd print
+                electronic mail) in any of The CureO healthcare pvt ltd print
                 or electronic publications ("Other Content").
             </p>
             <p className="font-f2 font-w1 md:text-[1rem]  text-c12 leading-[24px] md:px-[22px]">
                 Users entering material into the Web site are responsible for
-                the Other Content. Neither the website nor Medidek healthcare
+                the Other Content. Neither the website nor CureO healthcare
                 pvt ltd has any responsibility for Other Content, including the
                 content of any messages or information posted by Users or
                 others, or for the content of information accessible via direct
@@ -214,10 +214,10 @@ const TermsAndCondition = () => {
                 the website.
             </p>
             <p className="font-f2 font-w1 md:text-[1rem]  text-c12 leading-[24px] md:px-[22px]">
-                The User agrees to indemnify the website and Medidek healthcare
+                The User agrees to indemnify the website and CureO healthcare
                 pvt ltd from all damages, liabilities, costs, charges and
                 expenses, including reasonable attorneys' fees, that the
-                website, Medidek healthcare pvt ltd, their affiliates,
+                website, CureO healthcare pvt ltd, their affiliates,
                 employees, and authorized representatives may incur as a result
                 of either: (i) the User's breach of this Agreement; or (ii)
                 material entered into the Web site with the use of the User's
@@ -255,7 +255,7 @@ const TermsAndCondition = () => {
                 terminate.
             </p>
             <p className="font-f2 font-w1 md:text-[1rem]  text-c12 leading-[24px] md:px-[22px]">
-                Medidek healthcare pvt ltd may discontinue or change the Web
+                CureO healthcare pvt ltd may discontinue or change the Web
                 Site or its availability to you, a at any time. This Agreement
                 constitutes the entire agreement between the parties relating to
                 Web site and supersedes any and all other agreements, oral or in

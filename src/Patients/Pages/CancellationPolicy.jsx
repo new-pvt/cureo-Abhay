@@ -5,7 +5,7 @@ const CancellationPolicy = () => {
 
   useEffect(() => {
     // Check if the current route is the privacy policy route
-    if (location.pathname === "/medidek/cancellation-policy") {
+    if (location.pathname === "/cureO/cancellation-policy") {
         // Scroll to the privacy policy div
         const privacyPolicyDiv =
             document.getElementById("cancellationPolicy");

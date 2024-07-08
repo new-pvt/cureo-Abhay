@@ -12,7 +12,7 @@ const Section1 = () => {
         win.focus();
       };
     return (
-        <section className=" w-full section2Gradient relative overflow-hidden min-h-[calc(100vh-108px)] flex justify-center items-center px-4 py-4 md:px-[50px]">
+        <section className=" w-full section2Gradient relative overflow-hidden min-h-[calc(100dvh-108px)] flex justify-center items-center px-4 py-4 md:px-[50px]">
             <div className="w-full h-10  blur-[120px] absolute botto  bg-gradient-to-b from-[#1F51C6AD] via-[#108ED6] to-[#1F51C6]"></div>
 
             <div className="relative flex flex-col gap-4 w-full md:w-[39.33%] ">
@@ -22,7 +22,7 @@ const Section1 = () => {
                     className="absolute -left-[45%] md:-left-[85%] top-5 md:-top-10 w-[226.41px] md:w-full"
                 />
                 <h1 className="font-f1 font-w3 text-[28px] md:text-[2.813rem] text-center text-c15 leading-[39.99px] md:leading-[52.99px]">
-                    Transform Your Healthcare with Medidek
+                    Transform Your Healthcare with CureO
                 </h1>
                 <p className="font-f2 font-w1 md:text-[1rem] text-center text-c12 leading-[24px] md:px-[22px]">
                     Seamlessly Book Appointments, Securely Manage Medical

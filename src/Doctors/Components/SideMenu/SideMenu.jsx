@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { PiSquaresFourFill } from "react-icons/pi";
 import { TbEdit, TbClipboardText } from "react-icons/tb";
@@ -79,12 +79,10 @@ const SideMenu = () => {
 
     return (
         <nav className="fixed flex flex-col w-[15.43%] h-[calc(100vh-60px)]">
-            <img
-                src="/Home/IMG_20240127_122502.png"
-                alt="image"
-                className="w-[136px] h-[43px] ml-[30px]  "
-            />
-            <h5 className="pl-[30px] my-5 font-f2 font-w2">DUID :- {user?.doctorid}</h5>
+            <img src="/cureO.png" alt="image" className="w-10 ml-[30px]  " />
+            <h5 className="pl-[30px] my-5 font-f2 font-w2">
+                DUID :- {user?.doctorid}
+            </h5>
             {tabs?.map((tab) => (
                 <Link
                     key={tab?.tabName}
@@ -125,18 +123,18 @@ const SideMenu = () => {
                                 key={item?._id}
                             >
                                 <Avatar
-                                    src={item?.hospitalId === null
-                                        ? item?.imgurl
-                                        : item?.hospitalId?.imgurl}
+                                    src={
+                                        item?.hospitalId === null
+                                            ? item?.imgurl
+                                            : item?.hospitalId?.imgurl
+                                    }
                                     className="w-[39px] h-[39px]"
                                 />
                                 <p className="font-f2 font-w1 text-[13px] text-c16 leading-[19.5px]">
-                                    {
-                                        item?.hospitalId === null
+                                    {item?.hospitalId === null
                                         ? item?.nameOfTheDoctor
                                         : item?.hospitalId
-                                              ?.nameOfhospitalOrClinic
-                                    }
+                                              ?.nameOfhospitalOrClinic}
                                 </p>
                                 {item?._id == doctor?._id ? (
                                     <RiRadioButtonFill

@@ -116,9 +116,9 @@ const Navbar = () => {
             <header className="flex sticky top-0 z-10 justify-between px-4 py-4 md:px-[50px] md:pt-[30px] items-center backdrop-blur-[30px] ">
                 <img
                     onClick={() => navigate("/")}
-                    src="/Home/IMG_20240127_122502.png"
+                    src="/cureO.png"
                     alt="logo"
-                    className="w-[88px] h-[27px] md:w-[136px] md:h-[43px]"
+                    className=" md:w-[40px] h-[60px]"
                 />
                 <nav className="hidden md:flex items-center gap-[34px] bg-[#1F51C61F] px-[22px] py-[4px] rounded-[93px] ">
                     {ulList.map((list, i) => (

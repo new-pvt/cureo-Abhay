@@ -18,9 +18,9 @@ const Section4 = () => {
             <img src="/Home/app.png" alt="img" />
 
             <div className="flex flex-col items-center text-center md:items-end md:text-right w-full md:w-1/2">
-                <H2 content="Download the Medidek app" className=" " />
+                <H2 content="Download the CureO app" className=" " />
                 <P2
-                    content="Enhance Your Healthcare Experience with Medidek: Seamlessly Book Appointments, Securely Manage Medical Records, and Personalize Your Health Journey"
+                    content="Enhance Your Healthcare Experience with CureO: Seamlessly Book Appointments, Securely Manage Medical Records, and Personalize Your Health Journey"
                     className="md:w-[60%] "
                 />
                 <PrimaryButton

@@ -11,7 +11,7 @@ import {
 
 export const axiosClient = axios.create({
     baseURL: "https://medidek.shop",
-    // withCredentials: true
+    withCredentials: true,
 });
 // export const axiosClient = axios.create({
 //     baseURL: "https://cureo-backend.onrender.com",

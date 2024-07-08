@@ -45,15 +45,15 @@ const Footer = () => {
                 },
                 {
                     tabName: "Privacy Policy",
-                    to: "/medidek/privacy",
+                    to: "/cureO/privacy",
                 },
                 {
                     tabName: "Terms & Condition",
-                    to: "/medidek/termsAndCondition",
+                    to: "/cureO/termsAndCondition",
                 },
                 {
                     tabName: "Cancellation Policy",
-                    to: "/medidek/cancellation-policy",
+                    to: "/cureO/cancellation-policy",
                 },
             ],
         },
@@ -62,9 +62,9 @@ const Footer = () => {
         <footer className="bg-c1 w-full px-4 md:px-[63px] md:pt-[49px] pb-[15px]">
             <div className="flex flex-wrap justify-between md:items-center gap-[30px] md:gap-0 py-[25px]">
                 <img
-                    src="/Home/Medidek Logo_fontColor_Changed 2.png"
+                    src="/jpg.jpg"
                     alt="img"
-                    className="w-[162px] h-[38px] md:w-[230px] md:h-[72px] "
+                    className=" w-20 rounded-xl"
                 />
                 <div className="text-white block md:hidden">
                     <div className="flex gap-2.5 mt-2">
@@ -141,7 +141,7 @@ const Footer = () => {
             </div>
             <hr className="mt-[45px]" />
             <p className="text-white text-center mt-[13px]">
-                Copyright©2023 Medidek
+                Copyright©2023 CureO
             </p>
         </footer>
     );
